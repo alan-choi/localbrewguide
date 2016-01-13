@@ -3,18 +3,19 @@ import React from 'react';
 /*eslint-enable no-unused-vars*/
 
 import ReactDOM from 'react-dom';
-// import GroceryItemList from './components/grocery-item-list.js';
-// import groceryItemStore from './stores/grocery-item-store.js';
+import BreweryList from './components/breweryList.jsx';
+import BreweryStore from './stores/breweryStore.js';
 
 const mountPoint = document.getElementById('app');
-// let initial = groceryItemStore.getItems();
+let initial = BreweryStore.getBreweries(); //get items from store
 
 function render() {
-  ReactDOM.render(<div> hello from react </div>, mountPoint);
-  // ReactDOM.render(<GroceryItemList items={initial}/>, mountPoint);
+  ReactDOM.render(<BreweryList items={initial} />, mountPoint);
 }
-// groceryItemStore.onChange((items) => {
-//   initial = items;
-//   render();
-// });
+
+BreweryStore.onChange((items) => {
+  initial = items;
+  render();
+});
+
 render();

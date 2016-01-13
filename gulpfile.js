@@ -136,7 +136,7 @@ gulp.task('nodemon', function(cb) {
   var called = false;
   return nodemon({
     script: 'index.js',
-    watch: ['index.js', 'server/', 'app/views/'],
+    watch: ['index.js', 'server/', 'app/views/', 'app/components/'],
     ext: "js hbs",
     exec: "npm run babel-node",
     env: {
