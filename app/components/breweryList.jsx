@@ -2,8 +2,11 @@ import React from 'react';
 import BreweryListItem from './breweryListItem';
 import BreweryStore from './../stores/breweryStore';
 
-var BreweryList = React.createClass({
-  render: function() {
+class BreweryList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
     let breweries = [];
     for (var brewery in this.props.breweries) {
       let currentBrew = this.props.breweries[brewery];
@@ -17,6 +20,6 @@ var BreweryList = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default BreweryList;

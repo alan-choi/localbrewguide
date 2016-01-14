@@ -14,13 +14,20 @@ var ApiActions = assign({}, Dispatcher.prototype, {
     Dispatcher.dispatch(payload);
   },
 
+  changeSelectedBrewery: function(id) {
+    let payload = {
+      actionType: BreweryConstants.UPDATE_SELECTED_BREWERY,
+      id: id
+    };
+    Dispatcher.dispatch(payload);
+  },
+
   addBrewery: function(data) {
     console.log('adding new brewery');
     let payload = {
       actionType: BreweryConstants.ADD_BREWERY,
       brewery: data
     };
-    console.log(payload);
     Dispatcher.dispatch(payload);
   }
 });

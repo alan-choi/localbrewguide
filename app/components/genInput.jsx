@@ -1,23 +1,41 @@
 import React from 'react';
 
-var GenInput = React.createClass ({
-  getInitialState() {
-    var name = this.props.name;
-    return { name : "" };
-  },
+// var GenInput = React.createClass ({
+class GenInput extends React.Component {
+  constructor(props) {
+    super(props);
+    let name = props.name;
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      text: ""
+    };
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.submitted) {
+      this.setState({ text: "" });
+    }
+  }
 
   handleChange(event) {
-    event.preventDefault();
-    var name = this.props.name;
-    console.log(this.state);
-    this.setState({ name : event.target.value });
-  },
+    this.props.listenToTyping();
+    this.setState({ text : event.target.value });
+  }
 
   render() {
-    return (
-      <input name={this.props.name} value={this.state.value}></input>
+    // console.log(this.props);
+    var text = this.state.text;
+    return(
+      <input
+        type="text"
+        onChange={this.handleChange}
+        name={this.props.name}
+        value={ text }
+        placeholder={this.props.name}>
+      </input>
     );
   }
-});
-
-module.exports = GenInput;
+}
+// });
+export default GenInput;
+// module.exports = GenInput;

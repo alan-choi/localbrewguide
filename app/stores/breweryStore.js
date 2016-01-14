@@ -4,23 +4,32 @@ var BreweryConstants = require('./../Constants/breweryConstants');
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
+var UPDATE_DETAIL_EVENT = 'update_detail';
 var _breweries = {};
+var _selectedBrewery = {};
 
 var BreweryStore = assign({}, EventEmitter.prototype, {
   getBreweries: function() {
-    console.log(_breweries);
-
     return _breweries;
+  },
+
+  getSelectedBrewery: function() {
+    return _selectedBrewery;
   },
 
   addBreweries: function(newData) {
     newData.forEach(function(brewery) {
-      _breweries[brewery.name] = brewery;
+      _breweries[brewery._id] = brewery;
     });
   },
 
   updateBrewery: function(brewery) {
-    _breweries[brewery.name] = brewery;
+    _breweries[brewery._id] = brewery;
+  },
+
+  changeSelectedBrewery: function(id) {
+    _selectedBrewery = _breweries[id];
+    console.log(_selectedBrewery);
   },
 
   emitChange: function() {
@@ -30,6 +39,11 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
   addChangeListener: function(callback) {
     this.on(CHANGE_EVENT, callback);
   },
+
+  addSelectedBreweryListener: function(callback) {
+    this.on(UPDATE_DETAIL_EVENT, callback);
+  },
+  //remove event listener?
 
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
@@ -45,6 +59,10 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
         console.log('adding brewery');
         BreweryStore.updateBrewery(payload.brewery);
         BreweryStore.emit(CHANGE_EVENT);
+        break;
+      case BreweryConstants.UPDATE_SELECTED_BREWERY:
+        BreweryStore.changeSelectedBrewery(payload.id);
+        BreweryStore.emit(UPDATE_DETAIL_EVENT);
         break;
     }
 

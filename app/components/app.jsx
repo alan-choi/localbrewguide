@@ -2,35 +2,44 @@ import React from 'react';
 import Navbar from './navbar';
 import BreweryForm from './breweryForm';
 import BreweryList from './breweryList';
+import BreweryDetail from './breweryDetail';
 import BreweryStore from './../stores/breweryStore';
 import GenForm from './genForm';
 
-var App = React.createClass({
-  getInitialState: function() {
-    return { breweries: {} };
-  },
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { breweries: {}, selectedBrewery: {} };
+    this.onInitialLoad = this.onInitialLoad.bind(this);
+    this.updateSelectedBrewery = this.updateSelectedBrewery.bind(this);
+  }
 
-  componentDidMount: function(){
+  componentDidMount(){
     BreweryStore.addChangeListener(this.onInitialLoad);
-  },
+    BreweryStore.addSelectedBreweryListener(this.updateSelectedBrewery);
+  }
 
-  onInitialLoad: function() {
+  updateSelectedBrewery() {
+    var brewery = BreweryStore.getSelectedBrewery();
+    this.setState({ selectedBrewery: brewery });
+  }
+
+  onInitialLoad() {
     var breweries = BreweryStore.getBreweries();
     this.setState({ breweries: breweries });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
         <Navbar />
         <div className="brewery-container">
-          <BreweryList breweries={ this.state.breweries }/>
           <BreweryForm />
-          <GenForm />
+          <BreweryList breweries={ this.state.breweries }/>
+          <BreweryDetail brewery={ this.state.selectedBrewery }/>
         </div>
       </div>
     );
   }
-});
-
-module.exports = App;
+}
+export default App;

@@ -1,12 +1,11 @@
 import React from 'react';
 import GenInput from './genInput';
 
-var GenForm = React.createClass ({
-
+class GenForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     debugger;
-  },
+  }
 
   render() {
     return (
@@ -17,6 +16,5 @@ var GenForm = React.createClass ({
       </form>
     );
   }
-});
-
-module.exports = GenForm;
+}
+export default GenForm;
