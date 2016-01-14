@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from './navbar';
 import BreweryForm from './breweryForm';
 import BreweryList from './breweryList';
 import BreweryStore from './../stores/breweryStore';
@@ -20,8 +21,11 @@ var App = React.createClass({
   render: function() {
     return (
       <div>
-        <BreweryForm />
-        <BreweryList breweries={ this.state.breweries }/>
+        <Navbar />
+        <div className="brewery-container">
+          <BreweryList breweries={ this.state.breweries }/>
+          <BreweryForm />
+        </div>
       </div>
     );
   }

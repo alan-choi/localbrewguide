@@ -12,8 +12,7 @@ var BreweryList = React.createClass({
       );
     }
     return (
-      <div>
-        <div className="breweryList">list of breweries</div>
+      <div className="brewery-list">
         { breweries }
       </div>
     );

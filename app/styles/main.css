@@ -2,3 +2,44 @@ body {
   font-family: helvetica;
   color: black;
 }
+
+.navbar {
+  display: block;
+  height: 40px;
+  border: 1px solid blue;
+  line-height: 40px;
+  padding-left: 5px;
+}
+
+.brewery-container {
+  width: 900px;
+  margin: auto;
+}
+
+.brewery-form {
+  float: left;
+  font-size: 12px;
+}
+.brewery-form input {
+  margin: 5px;
+}
+
+.brewery-list {
+  float: left;
+  margin-right: 20px;
+}
+
+.brewery-item {
+  width: 200px;
+  height: 30px;
+  border: 1px solid gray;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.brewery-item:hover {
+  background-color: #197588;
+  cursor: pointer;
+}
