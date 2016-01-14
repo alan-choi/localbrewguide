@@ -14,7 +14,17 @@ breweryRouter.route('/')
         console.error("Error getting data: ", error);
         next(error);
       });
+  })
+  .post((req, res, next) => {
+    const brewery = req.body;
+    BreweryItem.create(brewery)
+    .then(() => {
+      console.log('successful post');
+      res.status(200).send(brewery);
+    }, (error) => {
+      console.log("Error saving data: ", error);
+      next(error);
+    });
   });
-
 
   export default breweryRouter;

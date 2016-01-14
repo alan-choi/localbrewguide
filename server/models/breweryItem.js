@@ -2,7 +2,12 @@ import mongoose from 'mongoose';
 
 const BreweryItemSchema = {
   id: String,
-  name: String
+  name: String,
+  street: String,
+  city: String,
+  state: String,
+  zip: String,
+  website: String
 };
 
 const BreweryItem = mongoose.model('BreweryItem', BreweryItemSchema, 'breweryItems');

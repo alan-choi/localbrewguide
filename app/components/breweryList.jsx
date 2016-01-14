@@ -3,20 +3,12 @@ import BreweryListItem from './breweryListItem';
 import BreweryStore from './../stores/breweryStore';
 
 var BreweryList = React.createClass({
-
-  parseBreweries: function(breweries) {
-
-    for (var brewery in this.props.breweries) {
-
-    }
-  },
-
   render: function() {
     let breweries = [];
     for (var brewery in this.props.breweries) {
       let currentBrew = this.props.breweries[brewery];
       breweries.push(
-        <BreweryListItem key={ currentBrew._id } brewery={ currentBrew } />
+        <BreweryListItem key={ currentBrew.name + currentBrew._id } brewery={ currentBrew } />
       );
     }
     return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import BreweryForm from './breweryForm';
 import BreweryList from './breweryList';
 import BreweryStore from './../stores/breweryStore';
 
@@ -19,10 +20,11 @@ var App = React.createClass({
   render: function() {
     return (
       <div>
+        <BreweryForm />
         <BreweryList breweries={ this.state.breweries }/>
       </div>
     );
   }
 });
 
-export default App;
+module.exports = App;

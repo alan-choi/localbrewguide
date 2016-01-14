@@ -8,6 +8,8 @@ var _breweries = {};
 
 var BreweryStore = assign({}, EventEmitter.prototype, {
   getBreweries: function() {
+    console.log(_breweries);
+
     return _breweries;
   },
 
@@ -15,6 +17,10 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
     newData.forEach(function(brewery) {
       _breweries[brewery.name] = brewery;
     });
+  },
+
+  updateBrewery: function(brewery) {
+    _breweries[brewery.name] = brewery;
   },
 
   emitChange: function() {
@@ -33,6 +39,11 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
     switch(payload.actionType) {
       case BreweryConstants.INITIAL_LOAD:
         BreweryStore.addBreweries(payload.data);
+        BreweryStore.emit(CHANGE_EVENT);
+        break;
+      case BreweryConstants.ADD_BREWERY:
+        console.log('adding brewery');
+        BreweryStore.updateBrewery(payload.brewery);
         BreweryStore.emit(CHANGE_EVENT);
         break;
     }

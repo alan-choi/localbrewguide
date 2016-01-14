@@ -1,14 +1,29 @@
 import $ from 'jquery';
 import ApiActions from './../actions/apiActions';
 
-class ApiUtil {
-  loadDatabase() {
+var ApiUtil = {
+  loadDatabase: function() {
     $.ajax({
       url: '/api/breweries',
       type: 'GET',
       dataType: 'json',
       success: function(data) {
-        ApiActions.initialLoad(data);
+        ApiActions.getBreweries(data);
+      }
+    });
+  },
+
+  postBrewery: function(data) {
+    $.ajax({
+      url: 'api/breweries',
+      type: 'POST',
+      data: data,
+      success: function(data) {
+        console.log('success!');
+        ApiActions.addBrewery(data);
+      },
+      error: function(error) {
+        console.log('error ' + error);
       }
     });
   }
@@ -16,6 +31,6 @@ class ApiUtil {
 
   //remove
 
-}
+};
 
-export default new ApiUtil();
+module.exports = ApiUtil;
