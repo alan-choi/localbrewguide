@@ -3,6 +3,7 @@ import Navbar from './navbar';
 import BreweryForm from './breweryForm';
 import BreweryList from './breweryList';
 import BreweryStore from './../stores/breweryStore';
+import GenForm from './genForm';
 
 var App = React.createClass({
   getInitialState: function() {
@@ -25,6 +26,7 @@ var App = React.createClass({
         <div className="brewery-container">
           <BreweryList breweries={ this.state.breweries }/>
           <BreweryForm />
+          <GenForm />
         </div>
       </div>
     );

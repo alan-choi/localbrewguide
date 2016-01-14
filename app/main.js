@@ -5,11 +5,7 @@ import BreweryStore from './stores/breweryStore';
 import './styles/main.css';
 import ApiUtil from './utils/apiUtil';
 
-const mountPoint = document.getElementById('app');
-
 ApiUtil.loadDatabase();
 
-function render() {
-  ReactDOM.render(<App />, mountPoint);
-}
-render();
+document.addEventListener('DOMContentLoaded',() => {
+  ReactDOM.render(<App />, document.getElementById('app')); });

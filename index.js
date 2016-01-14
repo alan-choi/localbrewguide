@@ -24,16 +24,16 @@ app.use('/vendor', express.static(__dirname + '/dist/vendor'));
 app.use('/styles', express.static(__dirname + '/dist/styles'));
 
 app.get('/', (req, res) => {
-  // res.render('index');
-  const reactApp = React.createFactory(BreweryList);
-  BreweryItem.find()
-    .then((data) => {
-      const generated = ReactDOM.renderToString(reactApp( {items: data} ));
-      res.render('index', { reactOutput: generated });
-    }, (error) => {
-      console.error('Error loading initial data', error);
-      res.status(500).send(error);
-    });
+  res.render('index');
+  // const reactApp = React.createFactory(BreweryList);
+  // BreweryItem.find()
+  //   .then((data) => {
+  //     const generated = ReactDOM.renderToString(reactApp( {items: data} ));
+  //     res.render('index', { reactOutput: generated });
+  //   }, (error) => {
+  //     console.error('Error loading initial data', error);
+  //     res.status(500).send(error);
+  //   });
 });
 
 app.listen(3000);

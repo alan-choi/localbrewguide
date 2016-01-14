@@ -15,10 +15,22 @@ var BreweryForm = React.createClass({
     };
   },
 
+  resetState: function() {
+    this.setState({
+      name: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+      website: ""
+    });
+  },
+
   handleSubmit: function(event) {
     event.preventDefault();
     let brewery = this.state;
     ApiUtil.postBrewery(brewery);
+    this.resetState();
   },
 
   render: function() {

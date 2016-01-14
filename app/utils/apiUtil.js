@@ -13,7 +13,7 @@ var ApiUtil = {
     });
   },
 
-  postBrewery: function(data) {
+  postBrewery(data) {
     $.ajax({
       url: 'api/breweries',
       type: 'POST',
