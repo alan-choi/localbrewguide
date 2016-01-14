@@ -16,7 +16,6 @@ function seedData() {
       }, {
         name: "21st Amendment"
       }];
-
       breweries.forEach((brewery) => {
         BreweryItem.create(brewery, (error) = {
           if (error) { console.error(error); }

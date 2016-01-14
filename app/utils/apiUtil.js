@@ -1,20 +1,19 @@
 import $ from 'jquery';
+import ApiActions from './../actions/apiActions';
 
 class ApiUtil {
-  get(url) {
-    return new Promise((success, error) => {
-      $.ajax({
-        url: url,
-        type: "GET",
-        dataType: 'json',
-        success: success,
-        error: error
-      });
+  loadDatabase() {
+    $.ajax({
+      url: '/api/breweries',
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+        ApiActions.initialLoad(data);
+      }
     });
   }
 
-  //post
-  //patch
+
   //remove
 
 }

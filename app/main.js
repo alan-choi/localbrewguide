@@ -1,21 +1,15 @@
-/*eslint-disable no-unused-vars*/
 import React from 'react';
-/*eslint-enable no-unused-vars*/
-
 import ReactDOM from 'react-dom';
-import BreweryList from './components/breweryList.jsx';
-import BreweryStore from './stores/breweryStore.js';
+import App from './components/app';
+import BreweryStore from './stores/breweryStore';
+import './styles/main.css';
+import ApiUtil from './utils/apiUtil';
 
 const mountPoint = document.getElementById('app');
-let initial = BreweryStore.getBreweries(); //get items from store
+
+ApiUtil.loadDatabase();
 
 function render() {
-  ReactDOM.render(<BreweryList items={initial} />, mountPoint);
+  ReactDOM.render(<App />, mountPoint);
 }
-
-BreweryStore.onChange((items) => {
-  initial = items;
-  render();
-});
-
 render();

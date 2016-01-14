@@ -15,23 +15,7 @@ var notify = require('gulp-notify');
 var newer = require('gulp-newer');
 var _ = require('lodash');
 
-// TODO: Extend gulpfile with info from https://jonsuh.com/blog/integrating-react-with-gulp/
-//var onError = function(err) {
-  //notify.onError({
-    //title:    "Error",
-    //message:  "<%= error %>"
-  //})(err);
-  //console.error(err);
-  //this.emit('end');
-//};
-
-//var plumberOptions = {
-  //errorHandler: onError
-//};
-
 var paths = {
-  normalize: 'node_modules/skeleton-css/css/normalize.css',
-  skeleton: 'node_modules/skeleton-css/css/skeleton.css',
   vendor: [
     'node_modules/react/dist/react-with-addons.js',
     'node_modules/react-dom/dist/react-dom.js',
@@ -41,7 +25,7 @@ var paths = {
   serverViews: ['./app/views/**/*.hbs'],
   clientScripts: ['app/**/*.js'],
   clientViews: ['./app/**/*.html'],
-  clientStyles: ['app/styles/*.css']
+  clientStyles: ['./app/styles/*.css']
 };
 
 // Linting tasks
@@ -119,15 +103,6 @@ gulp.task('copy-vendor', function() {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('copy-skeleton', function() {
-  gulp.src(paths.normalize)
-    .pipe(newer('app/styles/normalize.css'))
-    .pipe(gulp.dest('./app/styles/'));
-  gulp.src(paths.skeleton)
-    .pipe(newer('app/styles/skeleton.css'))
-    .pipe(gulp.dest('./app/styles/'));
-});
-
 // Nodemon task
 // TODO: There is a browserSync delay when the browser is opened and until the page
 // is served when starting the server and sometimes during a reload. I cannot figure out
@@ -137,7 +112,7 @@ gulp.task('nodemon', function(cb) {
   return nodemon({
     script: 'index.js',
     watch: ['index.js', 'server/', 'app/views/', 'app/components/'],
-    ext: "js hbs",
+    ext: "js jsx hbs",
     exec: "npm run babel-node",
     env: {
       "NODE_ENV": "development"
@@ -149,15 +124,10 @@ gulp.task('nodemon', function(cb) {
       called = true;
       cb();
     }
-  })
-  .on('restart', function() {
-    setTimeout(function() {
-      reload({ stream: false });
-    }, 1000);
   });
 });
 
-// Browser sync task
+//Browser sync task
 gulp.task('browser-sync', ['nodemon'], function() {
   browserSync({
     proxy: 'http://localhost:3000',
@@ -169,8 +139,6 @@ gulp.task('browser-sync', ['nodemon'], function() {
 });
 
 gulp.task('start:dev', ['browser-sync'], function() {
-  // TODO: Gulp does not ignore the files and folder I tell it to, so it restarts on every
-  // change even inside app/lib
-  gulp.watch(_(paths.clientScripts).concat(paths.clientViews, paths.clientStyles).value())
-    .on('change', browserSync.reload);
+  gulp.watch(_(paths.clientScripts).concat(paths.clientViews).value());
+    // .on('change', browserSync.reload);
 });

@@ -1,25 +1,56 @@
-import Guid from 'guid';
-const listeners = {};
+var Promise = require('es6-promise').Promise;
+var assign = require('object-assign');
 
-export default {
-  register(cb) {
-    console.info("Registering new listener ...");
-    // We generate a new guid for the callback that is going to register
-    const id = Guid.raw();
-    // and put the guid in the listeners object, as the key for the cb
-    listeners[id] = cb;
-    // A fully formed dispatcher has more than just register and dispatch.
-    // It has props like _isHandled etc. and other states. We return the id
-    // to work further with the cb, but in our simple example we don't need it anymore
-    return id;
+var _callbacks = [];
+var _promises = [];
+
+var Dispatcher = function() {};
+Dispatcher.prototype = assign({}, Dispatcher.prototype, {
+
+  /**
+   * Register a Store's callback so that it may be invoked by an action.
+   * @param {function} callback The callback to be registered.
+   * @return {number} The index of the callback within the _callbacks array.
+   */
+  register: function(callback) {
+    _callbacks.push(callback);
+    return _callbacks.length - 1; // index
   },
-  dispatch(payload) {
-    console.info("Dispatching ...", payload);
 
-    for (let id in listeners) {
-      const listener = listeners[id];
-      // as per the dispatcher architecture we send the payload to ALL registered callbacks
-      listener(payload);
-    }
+  /**
+   * dispatch
+   * @param  {object} payload The data from the action.
+   */
+  dispatch: function(payload) {
+    // First create array of promises for callbacks to reference.
+    var resolves = [];
+    var rejects = [];
+    _promises = _callbacks.map(function(_, i) {
+      return new Promise(function(resolve, reject) {
+        resolves[i] = resolve;
+        rejects[i] = reject;
+      });
+    });
+    // Dispatch to callbacks and resolve/reject promises.
+    _callbacks.forEach(function(callback, i) {
+      // Callback can return an obj, to resolve, or a promise, to chain.
+      // See waitFor() for why this might be useful.
+      Promise.resolve(callback(payload)).then(function() {
+        resolves[i](payload);
+      }, function() {
+        rejects[i](new Error('Dispatcher callback unsuccessful'));
+      });
+    });
+    _promises = [];
   }
-};
+});
+
+module.exports = new Dispatcher();
+
+// import {Dispatcher} from 'flux';
+//
+// const instance: Dispatcher<Action> = new Dispatcher();
+// export default instance;
+//
+// // So we can conveniently do, `import {dispatch} from './TodoDispatcher';`
+// export const dispatch = instance.dispatch.bind(instance);

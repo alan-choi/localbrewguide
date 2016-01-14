@@ -1,25 +1,31 @@
 import React from 'react';
-import BreweryListItem from './breweryListItem.jsx';
+import BreweryListItem from './breweryListItem';
 import BreweryStore from './../stores/breweryStore';
 
-class BreweryList extends React.Component {
-  componentDidMount() {
-    console.log('brewery list mounted');
-  }
+var BreweryList = React.createClass({
 
-  render() {
-    let incomingData = this.props.items || [];
-    let breweries = incomingData.map((item, index) => {
-      return <BreweryListItem key={'item' + index } item={ item } />;
-    });
+  parseBreweries: function(breweries) {
 
+    for (var brewery in this.props.breweries) {
+
+    }
+  },
+
+  render: function() {
+    let breweries = [];
+    for (var brewery in this.props.breweries) {
+      let currentBrew = this.props.breweries[brewery];
+      breweries.push(
+        <BreweryListItem key={ currentBrew._id } brewery={ currentBrew } />
+      );
+    }
     return (
       <div>
-        <div>list of breweries!!</div>
+        <div className="breweryList">list of breweries</div>
         { breweries }
       </div>
     );
   }
-}
+});
 
 export default BreweryList;

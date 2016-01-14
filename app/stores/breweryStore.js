@@ -1,40 +1,45 @@
-import dispatcher from './../dispatcher.js';
-import apiUtil from './../utils/apiUtil.js';
+var AppDispatcher = require('./../dispatcher');
+var EventEmitter = require('events').EventEmitter;
+var BreweryConstants = require('./../Constants/breweryConstants');
+var assign = require('object-assign');
 
-class BreweryStore {
-  constructor() {
-    this.breweries = [];
-    this.listeners = [];
+var CHANGE_EVENT = 'change';
+var _breweries = {};
 
-    apiUtil.get('api/breweries')
-      .then((data) => {
-      this.items = data;
-      console.log(data);
-      this.triggerListeners();
+var BreweryStore = assign({}, EventEmitter.prototype, {
+  getBreweries: function() {
+    return _breweries;
+  },
+
+  addBreweries: function(newData) {
+    newData.forEach(function(brewery) {
+      _breweries[brewery.name] = brewery;
     });
+  },
 
-    dispatcher.register((event) => {
-      console.log('regeistering event', event);
-      // switch (event.payload) {
-      //   case
-      // }
-    });
-  }
+  emitChange: function() {
+    this.emit(CHANGE_EVENT);
+  },
 
-  getBreweries() {
-    console.log(this.breweries);
-    return this.breweries;
-  }
+  addChangeListener: function(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
 
-  onChange(listener) {
-    this.listeners.push(listener);
-  }
+  removeChangeListener: function(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  },
 
-  triggerListeners() {
-    this.listeners.forEach((listener) => {
-      listener(this.items);
-    });
-  }
-}
+  dispatcherIndex: AppDispatcher.register(function(payload) {
+    switch(payload.actionType) {
+      case BreweryConstants.INITIAL_LOAD:
+        BreweryStore.addBreweries(payload.data);
+        BreweryStore.emit(CHANGE_EVENT);
+        break;
+    }
 
-export default new BreweryStore();
+    return true;
+  })
+
+});
+
+module.exports = BreweryStore;
