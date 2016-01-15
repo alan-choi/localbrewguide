@@ -2,25 +2,18 @@ var React = require('react');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var ApiUtil = require('./../utils/apiUtil');
 import GenInput from './genInput';
-// var BreweryForm = React.createClass({
-  // mixins: [LinkedStateMixin],
+
 class BreweryForm extends React.Component {
-  // getInitialState() {
-  //   return {
-  //     name: "",
-  //     street: "",
-  //     city: "",
-  //     state: "",
-  //     zip: "",
-  //     website: ""
-  //   };
-  // }
   constructor() {
     super();
     this.listenToTyping = this.listenToTyping.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fieldNames = ['name', 'street', 'city', 'state', 'zip', 'website'];
-    this.state = { submitted: false };
+    this.state = { submitted: false, editMode: false };
+  }
+
+  componentWillReceiveProps(newProps) {
+      this.setState({ editMode: newProps.editMode });
   }
 
   handleSubmit(event) {
@@ -29,7 +22,12 @@ class BreweryForm extends React.Component {
     let formData = Array.prototype.slice.call(event.target.children);
     let brewery = {};
     formData.splice(0, length - 2).forEach((input) => { brewery[input.name] = input.value; });
-    ApiUtil.postBrewery(brewery);
+    if(this.props.editMode) {
+      brewery._id = this.props.brewery._id;
+      // ApiUtil.patchBrewery(brewery);
+    } else {
+      ApiUtil.postBrewery(brewery);
+    }
     this.setState({ submitted: true });
   }
 
@@ -40,13 +38,14 @@ class BreweryForm extends React.Component {
   }
 
   render() {
-    console.log('form rendered');
     let allInputs = this.fieldNames.map((fieldName, idx) => {
       return (
         <GenInput
           key={ fieldName + idx }
+          brewery={ this.props.brewery }
           listenToTyping={ this.listenToTyping }
           submitted={ this.state.submitted }
+          editMode={ this.state.editMode }
           name={ fieldName } />);
     });
 
@@ -61,14 +60,3 @@ class BreweryForm extends React.Component {
   }
 }
 export default BreweryForm;
-//
-// resetState() {
-//   this.setState({
-//     name: "",
-//     street: "",
-//     city: "",
-//     state: "",
-//     zip: "",
-//     website: ""
-//   });
-// }

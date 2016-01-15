@@ -9,9 +9,10 @@ import GenForm from './genForm';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { breweries: {}, selectedBrewery: {} };
+    this.state = { breweries: {}, selectedBrewery: {}, editMode: false };
     this.onInitialLoad = this.onInitialLoad.bind(this);
     this.updateSelectedBrewery = this.updateSelectedBrewery.bind(this);
+    this.toggleEditMode = this.toggleEditMode.bind(this);
   }
 
   componentDidMount(){
@@ -19,9 +20,9 @@ class App extends React.Component {
     BreweryStore.addSelectedBreweryListener(this.updateSelectedBrewery);
   }
 
-  updateSelectedBrewery() {
+  updateSelectedBrewery(selection) {
     var brewery = BreweryStore.getSelectedBrewery();
-    this.setState({ selectedBrewery: brewery });
+    this.setState({ selectedBrewery: selection || brewery });
   }
 
   onInitialLoad() {
@@ -29,13 +30,25 @@ class App extends React.Component {
     this.setState({ breweries: breweries });
   }
 
+  toggleEditMode(event) {
+    event.preventDefault();
+    this.setState({ editMode: !this.state.editMode });
+  }
+
   render() {
+    var editText = (this.state.editMode ? "close" : "edit mode");
     return (
       <div>
         <Navbar />
+        <button onClick={ this.toggleEditMode }>{ editText }</button>
         <div className="brewery-container">
-          <BreweryForm />
-          <BreweryList breweries={ this.state.breweries }/>
+          <BreweryForm
+            editMode={ this.state.editMode }
+            brewery={ this.state.selectedBrewery }/>
+          <BreweryList
+            breweries={ this.state.breweries }
+            editMode={ this.state.editMode }
+            fillBreweryForm={ this.updateSelectedBrewery }/>
           <BreweryDetail brewery={ this.state.selectedBrewery }/>
         </div>
       </div>

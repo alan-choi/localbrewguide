@@ -10,8 +10,13 @@ class BreweryList extends React.Component {
     let breweries = [];
     for (var brewery in this.props.breweries) {
       let currentBrew = this.props.breweries[brewery];
+      let editMode = this.props.editMode;
       breweries.push(
-        <BreweryListItem key={ currentBrew.name + currentBrew._id } brewery={ currentBrew } />
+        <BreweryListItem
+          key={ currentBrew.name + currentBrew._id }
+          brewery={ currentBrew }
+          editMode={ editMode }
+          fillBreweryForm={ this.props.fillBreweryForm } />
       );
     }
     return (

@@ -13,7 +13,7 @@ var ApiUtil = {
     });
   },
 
-  postBrewery(data) {
+  postBrewery: function(data) {
     $.ajax({
       url: 'api/breweries',
       type: 'POST',
@@ -26,10 +26,22 @@ var ApiUtil = {
         console.log('error ' + error);
       }
     });
+  },
+
+  patchBrewery: function(data) {
+    $.ajax({
+      url: 'api/breweries/:id',
+      type: 'PATCH',
+      data: data,
+      succcess: function(data) {
+        console.log('updated!');
+        ApiActions.updateBrewery(data);
+      },
+      error: function(error) {
+        console.log('error updating');
+      }
+    });
   }
-
-
-  //remove
 
 };
 

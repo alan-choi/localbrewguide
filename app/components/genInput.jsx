@@ -1,6 +1,5 @@
 import React from 'react';
 
-// var GenInput = React.createClass ({
 class GenInput extends React.Component {
   constructor(props) {
     super(props);
@@ -12,8 +11,11 @@ class GenInput extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.submitted) {
+    var brewery = newProps.brewery;
+    if (newProps.submitted || !newProps.editMode) {
       this.setState({ text: "" });
+    } else if(newProps.editMode) {
+      this.setState({ text: brewery[this.props.name] });
     }
   }
 
@@ -23,7 +25,6 @@ class GenInput extends React.Component {
   }
 
   render() {
-    // console.log(this.props);
     var text = this.state.text;
     return(
       <input

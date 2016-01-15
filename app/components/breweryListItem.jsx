@@ -9,12 +9,23 @@ class breweryListItem extends React.Component {
 
   handleClick(event) {
     event.preventDefault();
-    ApiActions.changeSelectedBrewery(this.props.brewery._id);
+    if (this.props.editMode) {
+      this.props.fillBreweryForm(this.props.brewery);
+    } else {
+      ApiActions.changeSelectedBrewery(this.props.brewery._id);
+    }
+  }
+
+  editBrewery(event) {
+    event.preventDefault();
+    console.log(this.props.brewery);
   }
 
   render() {
     return (
-      <div className='brewery-item' onClick={ this.handleClick }> { this.props.brewery.name }</div>
+      <div className='brewery-item' onClick={ this.handleClick }>
+         { this.props.brewery.name }
+       </div>
     );
   }
 }
