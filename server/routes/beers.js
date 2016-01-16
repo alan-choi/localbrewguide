@@ -1,13 +1,14 @@
 import express from 'express';
-import BreweryItem from './../models/breweryItem.js';
+import BeerItem from './../models/beerItem.js';
 
-const breweryRouter = express.Router({
+const beerRouter = express.Router({
   mergeParams: true
 });
 
-breweryRouter.route('/')
+beerRouter.route('/')
   .get((req, res, next) => {
-    BreweryItem.find({})
+    let id = req.query._id;
+    BeerItem.find({ breweryId: id })
       .then((items) => {
         res.send(items);
       }, (error) => {
@@ -16,22 +17,22 @@ breweryRouter.route('/')
       });
   })
   .post((req, res, next) => {
-    const brewery = req.body;
-    BreweryItem.create(brewery)
+    const beer = req.body;
+    BeerItem.create(beer)
     .then(() => {
       console.log('successful post');
-      res.status(200).send(brewery);
+      res.status(200).send(beer);
     }, (error) => {
       console.log("Error saving data: ", error);
       next(error);
     });
   });
 
-  breweryRouter.route('/:id')
+  beerRouter.route('/:id')
     .patch((req, res, next) => {
       let id = req.params.id;
-      let brewery = req.body;
-      BreweryItem.findByIdAndUpdate(id, brewery, (err, brewery) => {
+      let beer = req.body;
+      BeerItem.findByIdAndUpdate(id, beer, (err, beer) => {
         if (err) {
           console.error('error updating data: ', err);
           res.status(500);
@@ -43,4 +44,4 @@ breweryRouter.route('/')
       });
     });
 
-  export default breweryRouter;
+  export default beerRouter;

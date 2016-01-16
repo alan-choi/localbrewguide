@@ -1,5 +1,4 @@
 var React = require('react');
-var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var ApiUtil = require('./../utils/apiUtil');
 import GenInput from './genInput';
 
@@ -21,10 +20,11 @@ class BreweryForm extends React.Component {
     let length = event.target.children.length;
     let formData = Array.prototype.slice.call(event.target.children);
     let brewery = {};
-    formData.splice(0, length - 2).forEach((input) => { brewery[input.name] = input.value; });
+    formData.splice(0, length - 1).forEach((input) =>
+      { brewery[input.name] = input.value; });
     if(this.props.editMode) {
       brewery._id = this.props.brewery._id;
-      // ApiUtil.patchBrewery(brewery);
+      ApiUtil.patchBrewery(brewery);
     } else {
       ApiUtil.postBrewery(brewery);
     }

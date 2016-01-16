@@ -1,5 +1,6 @@
 import React from 'react';
 import ApiActions from './../actions/apiActions';
+import ApiUtil from './../utils/apiUtil';
 
 class breweryListItem extends React.Component {
   constructor(props) {
@@ -13,12 +14,8 @@ class breweryListItem extends React.Component {
       this.props.fillBreweryForm(this.props.brewery);
     } else {
       ApiActions.changeSelectedBrewery(this.props.brewery._id);
+      ApiUtil.getBeers(this.props.brewery);
     }
-  }
-
-  editBrewery(event) {
-    event.preventDefault();
-    console.log(this.props.brewery);
   }
 
   render() {

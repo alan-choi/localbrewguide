@@ -5,8 +5,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 
 import breweryRouter from './server/routes/breweries.js';
+import beerRouter from './server/routes/beers.js';
 import './server/database.js';
 import BreweryItem from './server/models/breweryItem';
+import BeerItem from './server/models/beerItem';
 import BreweryList from './app/components/breweryList';
 
 const app = express();
@@ -18,6 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/breweries', breweryRouter);
+app.use('/api/beers', beerRouter);
 
 app.use('/client', express.static(__dirname + '/dist/client'));
 app.use('/vendor', express.static(__dirname + '/dist/vendor'));

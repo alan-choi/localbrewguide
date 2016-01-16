@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import BreweryItem from './models/breweryItem.js';
+import BeerItem from './models/beerItem.js';
 
 mongoose.connect('mongodb://localhost/localbrewguide');
 mongoose.Promise = global.Promise;

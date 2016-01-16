@@ -25,11 +25,11 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
 
   updateBrewery: function(brewery) {
     _breweries[brewery._id] = brewery;
+    _selectedBrewery = brewery;
   },
 
   changeSelectedBrewery: function(id) {
     _selectedBrewery = _breweries[id];
-    console.log(_selectedBrewery);
   },
 
   emitChange: function() {
@@ -42,6 +42,10 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
 
   addSelectedBreweryListener: function(callback) {
     this.on(UPDATE_DETAIL_EVENT, callback);
+  },
+
+  addDetailChangeListener: function(callback) {
+    this.on(UPDATE_INFO_EVENT, callback);
   },
   //remove event listener?
 
@@ -64,6 +68,13 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
         BreweryStore.changeSelectedBrewery(payload.id);
         BreweryStore.emit(UPDATE_DETAIL_EVENT);
         break;
+      case BreweryConstants.UPDATE_BREWERY:
+        console.log('updating brewery in store');
+        BreweryStore.updateBrewery(payload.brewery);
+        BreweryStore.emit(UPDATE_DETAIL_EVENT);
+        break;
+      default:
+        console.log('no event fired...');
     }
 
     return true;

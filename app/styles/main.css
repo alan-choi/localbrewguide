@@ -2,6 +2,9 @@ body {
   font-family: helvetica;
   color: black;
 }
+p {
+  margin: 0px
+}
 
 .navbar {
   display: block;
@@ -28,19 +31,21 @@ body {
   float: left;
   margin-top: 20px;
   margin-bottom: 10px;
-  width:800px;
+  width: 800px;
   height: 200px;
-  border: 1px solid black;
+  border: 1px solid gray;
   overflow-y: scroll;
+  box-sizing: border-box;
 }
 
 .brewery-item {
-  width: 200px;
-  height: 30px;
+  width: 780px;
+  height: 35px;
   border: 1px solid gray;
   font-size: 14px;
   line-height: 30px;
-  text-align: center;
+  padding: 0px 10px 0px 10px;
+  /*text-align: center;*/
   box-sizing: border-box;
 }
 
@@ -51,7 +56,8 @@ body {
 
 .brewery-detail {
   float: left;
+  padding: 5px;
   border: 1px solid black;
-  width: 800px;
+  width: 790px;
   height: 400px;
 }

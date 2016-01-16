@@ -13,6 +13,20 @@ var ApiUtil = {
     });
   },
 
+  getBeers: function(brewery) {
+    $.ajax({
+      url: 'api/beers' ,
+      type: 'GET',
+      data: brewery,
+      dataType: 'json',
+      success: function(data) {
+        console.log(data);
+        // ApiActions.updateBeersInStore(data);
+        console.log('got the beers!');
+      }
+    });
+  },
+
   postBrewery: function(data) {
     $.ajax({
       url: 'api/breweries',
@@ -29,11 +43,13 @@ var ApiUtil = {
   },
 
   patchBrewery: function(data) {
+    console.log('patching data');
     $.ajax({
-      url: 'api/breweries/:id',
+      url: 'api/breweries/' + data._id,
       type: 'PATCH',
+      dataType: 'json',
       data: data,
-      succcess: function(data) {
+      success: function(data) {
         console.log('updated!');
         ApiActions.updateBrewery(data);
       },

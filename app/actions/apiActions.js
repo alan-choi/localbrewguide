@@ -1,6 +1,7 @@
 
-import Dispatcher from './../dispatcher.js';
-import BreweryConstants from './../constants/BreweryConstants.js';
+import Dispatcher from './../dispatcher';
+import BeerConstants from './../constants/beerConstants';
+import BreweryConstants from './../constants/breweryConstants';
 var assign = require('object-assign');
 
 var ApiActions = assign({}, Dispatcher.prototype, {
@@ -8,6 +9,15 @@ var ApiActions = assign({}, Dispatcher.prototype, {
     console.log('loading initial data');
     let payload = {
       actionType: BreweryConstants.INITIAL_LOAD,
+      data: data
+    };
+
+    Dispatcher.dispatch(payload);
+  },
+
+  updateBeersInStore: function(data) {
+    let payload = {
+      actionType: BeerConstants.UPDATE_BEER_LIST,
       data: data
     };
 
@@ -26,6 +36,15 @@ var ApiActions = assign({}, Dispatcher.prototype, {
     console.log('adding new brewery');
     let payload = {
       actionType: BreweryConstants.ADD_BREWERY,
+      brewery: data
+    };
+    Dispatcher.dispatch(payload);
+  },
+
+  updateBrewery: function(data) {
+    console.log('updating brewery action');
+    let payload = {
+      actionType: BreweryConstants.UPDATE_BREWERY,
       brewery: data
     };
     Dispatcher.dispatch(payload);
