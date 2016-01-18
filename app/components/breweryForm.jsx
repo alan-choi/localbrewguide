@@ -7,7 +7,8 @@ class BreweryForm extends React.Component {
     super();
     this.listenToTyping = this.listenToTyping.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.fieldNames = ['name', 'street', 'city', 'state', 'zip', 'website'];
+    this.fieldNames =
+      ['name', 'street', 'city', 'state', 'zip', 'neighborhood','website'];
     this.state = { submitted: false, editMode: false };
   }
 
@@ -42,6 +43,7 @@ class BreweryForm extends React.Component {
       return (
         <GenInput
           key={ fieldName + idx }
+          beer ={'empty beer'}
           brewery={ this.props.brewery }
           listenToTyping={ this.listenToTyping }
           submitted={ this.state.submitted }

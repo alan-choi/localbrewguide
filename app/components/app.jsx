@@ -19,10 +19,12 @@ class App extends React.Component {
     this.updateSelectedBrewery = this.updateSelectedBrewery.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.getBeersFromStore = this.getBeersFromStore.bind(this);
+    this.updateBeerList = this.updateBeerList.bind(this);
   }
 
   componentDidMount(){
     BeerStore.addChangeListener(this.getBeersFromStore);
+    BeerStore.addUpdateListener(this.updateBeerList);
     BreweryStore.addChangeListener(this.onInitialLoad);
     BreweryStore.addSelectedBreweryListener(this.updateSelectedBrewery);
   }
@@ -39,12 +41,21 @@ class App extends React.Component {
   }
 
   onInitialLoad() {
+    console.log('getting breweries from store');
     var breweries = BreweryStore.getBreweries();
+    console.log(breweries);
     this.setState({ breweries: breweries });
   }
 
   getBeersFromStore() {
-    var beers = BeerStre.getBeers();
+    console.log('getting beers from store!');
+    var beers = BeerStore.getBeers();
+    this.setState({ beers: beers });
+  }
+
+  updateBeerList() {
+    console.log('updating beer list');
+    var beers = BeerStore.getBeers();
     this.setState({ beers: beers });
   }
 
@@ -54,11 +65,20 @@ class App extends React.Component {
   }
 
   render() {
+    var breweryDetail = (Object.keys(this.state.selectedBrewery).length === 0 ? <div></div> :
+    <BreweryDetail
+      editMode={ this.state.editMode }
+      beers = { this.state.beers }
+      brewery={ this.state.selectedBrewery }/>
+  );
     var editText = (this.state.editMode ? "close" : "edit mode");
-    var breweryForm = (this.state.editMode ?
-      <BreweryForm
+    // var breweryForm = (this.state.editMode ?
+    //   <BreweryForm
+    //     editMode={ this.state.editMode }
+    //     brewery={ this.state.selectedBrewery }/> : "");
+    var breweryForm = (<BreweryForm
         editMode={ this.state.editMode }
-        brewery={ this.state.selectedBrewery }/> : "");
+        brewery={ this.state.selectedBrewery }/>);
 
     return (
       <div>
@@ -70,10 +90,7 @@ class App extends React.Component {
             breweries={ this.state.breweries }
             editMode={ this.state.editMode }
             fillBreweryForm={ this.updateSelectedBrewery }/>
-          <BreweryDetail
-            editMode={ this.state.editMode }
-            beers = { this.state.beers }
-            brewery={ this.state.selectedBrewery }/>
+          { breweryDetail }
         </div>
       </div>
     );

@@ -1,0 +1,182 @@
+@import url(https://fonts.googleapis.com/css?family=Hind:400,300,500,600);
+
+body {
+  font-family: Hind;
+  color: black;
+}
+
+p {
+  margin: 0px
+}
+
+.navbar {
+  display: block;
+  height: 60px;
+  border-bottom: 1px solid black;
+  line-height: 60px;
+  padding-left: 5px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.brewery-container {
+  width: 900px;
+  margin: auto;
+}
+
+.brewery-form {
+  float: left;
+  font-size: 12px;
+}
+.brewery-form {
+  input {
+    margin: 5px;
+  }
+}
+
+.brewery-list {
+  float: left;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 800px;
+  height: 201px;
+  border: 1px solid gray;
+  box-sizing: border-box;
+
+  .scroll-area {
+    overflow-y: scroll;
+    height: 160px;
+  }
+  .list-head{
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  ul {
+    padding: none;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid gray;
+    box-sizing: border-box;
+    height: 40px;
+    margin: 0px;
+  }
+
+  li:first-child {
+    width: 200px;
+  }
+
+  li {
+    width: 120px;
+    display: inline-block;
+  }
+}
+
+.brewery-item {
+  width: 800px;
+  font-size: 14px;
+  line-height: 40px;
+  // padding: 0px 10px 0px 10px;
+  box-sizing: border-box;
+}
+
+.brewery-item:hover {
+  background-color: #197588;
+  cursor: pointer;
+}
+
+.brewery-detail{
+  position: relative;
+  float: left;
+  border: 1px solid black;
+  width: 800px;
+  height: 500px;
+
+  .brewery-name {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+  }
+  .brewery-neighborhood{
+    text-align: center;
+    font-size: 12px;
+  }
+  .brewery-website{
+    text-align: center;
+    font-size: 10px;
+    margin-bottom: 20px;
+
+  }
+  .major-stat {
+    position: relative;
+    flex-grow: 1;
+    width: 33%;
+    height: 100px;
+    line-height: 75px;
+    text-align: center;
+    background-color: #336699;
+    color: white;
+
+    p {
+      position: absolute;
+      line-height: 12px;
+      left: 50%;
+      top:60%;
+      transform: translate(-50%, -20%);
+      height: 10px;
+      font-size: 12px
+    }
+  }
+  .stats {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+  }
+  .beer-list {
+    position: absolute;
+    bottom: 20px;
+    width: 700px;
+    height: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid black;
+    font-size: 14px;
+    line-height: 25px;
+
+    .beerlist-header {
+      font-size: 16px;
+      font-weight: 500;
+      height: 30px;
+      border-bottom: 1px solid gray;
+      line-height: 30px;
+      ul {
+        border: none;
+      }
+    }
+
+    .beerlist-scroll {
+      height: 170px;
+      overflow-y: scroll;
+    }
+
+    li:first-child{
+      width: 300px
+    }
+    li {
+      width: 100px;
+      display: inline-block;
+      height: 25px;
+    }
+    ul {
+      padding: 5px;
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid gray;
+      margin: 0px;
+    }
+  }
+  form {
+    width: 700px;
+    margin: 5px auto;;
+  }
+}

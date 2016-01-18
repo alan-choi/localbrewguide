@@ -12,9 +12,12 @@ class GenInput extends React.Component {
 
   componentWillReceiveProps(newProps) {
     var brewery = newProps.brewery;
+    var beer = newProps.beer;
     if (newProps.submitted || !newProps.editMode) {
       this.setState({ text: "" });
-    } else if(newProps.editMode) {
+    } else if(newProps.editMode && beer !== 'empty beer') {
+      this.setState({ text: beer[this.props.name] });
+    } else if (newProps.editMode) {
       this.setState({ text: brewery[this.props.name] });
     }
   }

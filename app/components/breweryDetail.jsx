@@ -1,46 +1,87 @@
 import React from 'react';
 import GenForm from './genForm';
 import Beer from './beerItem';
+import BeerStore from './../stores/BeerStore';
 
 class BreweryDetail extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = { beers: {} };
+    this.abvSum = 0;
+    this.ibuSum = 0;
+    this.totalBeers = 0;
+    this.changeSelectedBeer = this.changeSelectedBeer.bind(this);
+    this.state = { selectedBeer: {} };
+  }
+
+  componentDidMount() {
+    BeerStore.addSelectedBeerListener(this.changeSelectedBeer);
   }
 
   componentWillReceiveProps(newProps) {
-    console.log('detailed brewery');
-    // console.log(newProps.brewery);
+    console.log('detailed brewery props');
+    // console.log(newProps.beers);
+  }
+
+  changeSelectedBeer() {
+    let beer = BeerStore.getSelectedBeer();
+    this.setState({ selectedBeer: beer });
   }
 
   render() {
-    var beerForm = (this.props.editMode ?
-      <GenForm
+    // var beerForm = (this.props.editMode ?
+    //   <GenForm
+    //     fieldNames={['beerName', 'beerType', 'abv', 'ibu']}
+    //     brewery={ this.props.brewery } /> : ""
+    // );
+    var beerForm = (<GenForm
         fieldNames={['beerName', 'beerType', 'abv', 'ibu']}
-        brewery={ this.props.brewery } /> : ""
-    );
+        editMode={ this.props.editMode }
+        beer={ this.state.selectedBeer }
+        brewery={ this.props.brewery } />);
     var beers = [];
 
     for (var beer in this.props.beers) {
       beers.push(
         <Beer
+          key={ this.props.beers[beer]._id }
           beer={ this.props.beers[beer] }
           brewery={ this.props.brewery } />
       );
     }
     return(
       <div className="brewery-detail">
-        { this.props.brewery.name }
-        <p>
-          { this.props.brewery.street }
-        </p>
-        <p>
-          { this.props.brewery.city } { this.props.brewery.state } { this.props.brewery.zip }
-        </p>
-        <p>
-          { this.props.brewery.website }
-        </p>
+        <div className="brewery-name">{ this.props.brewery.name }</div>
+        <div className="brewery-neighborhood">{ this.props.brewery.neighborhood }</div>
+        <div className="brewery-website"><a href={'http://'+this.props.brewery.website} target="_blank" >website</a></div>
+        <div className="stats">
+          <div className="major-stat">
+            { this.props.brewery.beerSummary.abv }
+            <p>ABV</p>
+          </div>
+          <div className="major-stat">
+            { this.props.brewery.beerSummary.ibu }
+            <p>IBU</p>
+          </div>
+          <div className="major-stat">
+            { this.props.brewery.beers.length }
+            <p>Total Beers</p>
+          </div>
+        </div>
         { beerForm }
+        <br />
+        <div className="beer-list">
+          <div className="beerlist-header">
+            <ul>
+              <li>Name</li>
+              <li>Type</li>
+              <li>ABV</li>
+              <li>IBU</li>
+            </ul>
+          </div>
+          <div className="beerlist-scroll">
+            { beers }
+          </div>
+        </div>
       </div>
     );
   }

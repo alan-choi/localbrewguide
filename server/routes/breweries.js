@@ -1,19 +1,55 @@
 import express from 'express';
 import BreweryItem from './../models/breweryItem.js';
+import BeerItem from './../models/beerItem.js';
 
 const breweryRouter = express.Router({
   mergeParams: true
 });
 
+var summarizeBeers = function(beers) {
+  let beerSummary = {};
+  let mostCommon = '';
+  let max = 0;
+  let abvSum = 0;
+  let ibuSum = 0;
+  beers.forEach((beer) => {
+    abvSum += beer.abv;
+    ibuSum += beer.ibu;
+    let beerType = beer.beerType;
+    if (typeof beerSummary[beerType] === 'undefined') {
+      beerSummary[beerType] = 1;
+    } else {
+      beerSummary[beerType] += 1;
+      if (beerSummary[beerType] > max) {
+        max = beerSummary[beerType];
+        beerSummary.mostCommon = beerType;
+      }
+    }
+  });
+  beerSummary.abv = (abvSum/beers.length).toFixed(2);
+  beerSummary.ibu = (ibuSum/beers.length).toFixed(2);
+  return beerSummary;
+};
+
 breweryRouter.route('/')
   .get((req, res, next) => {
-    BreweryItem.find({})
-      .then((items) => {
-        res.send(items);
-      }, (error) => {
-        console.error("Error getting data: ", error);
-        next(error);
+    BreweryItem.find({}, null, {sort: {name: 1}}).lean().exec((error, breweries) => {
+      if (error){
+        console.log('error getting data');
+        res.status(500);
+      }
+      var counter = 0;
+      breweries.forEach((brewery) => {
+        let beers = BeerItem.find({ breweryId: brewery._id }).lean().exec((error, beers) => {
+          counter += 1;
+          brewery.beers = beers;
+          brewery.beerSummary = summarizeBeers(beers);
+          if (counter === breweries.length) {
+            res.send(breweries);
+          }
+        });
       });
+    });
   })
   .post((req, res, next) => {
     const brewery = req.body;

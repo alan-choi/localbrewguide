@@ -23,11 +23,11 @@ class genForm extends React.Component {
       { item[input.name] = input.value; });
     if(this.props.editMode) {
       item._id = this.props.beer._id;
-      // ApiUtil.patchBrewery(item);
+      ApiUtil.patchBeer(item);
     } else {
       item.breweryId = this.props.brewery._id;
-      console.log(item);
-      // ApiUtil.postBrewery(item);
+      console.log('adding this beer to the database');
+      ApiUtil.postBeer(item);
     }
     this.setState({ submitted: true });
   }
@@ -39,7 +39,6 @@ class genForm extends React.Component {
   }
 
   render() {
-    // console.log(this.props);
     var buttonText = ( this.props.editMode ? "update" : "add" );
     let allInputs = this.props.fieldNames.map((fieldName, idx) => {
       return (

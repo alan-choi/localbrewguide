@@ -21,7 +21,18 @@ class BreweryList extends React.Component {
     }
     return (
       <div className="brewery-list">
-        { breweries }
+        <div className="list-head">
+          <ul>
+            <li>Name</li>
+            <li>Neighborhood</li>
+            <li>ABV</li>
+            <li>IBU</li>
+            <li>Common Beer</li>
+          </ul>
+        </div>
+        <div className="scroll-area">
+          { breweries }
+        </div>
       </div>
     );
   }

@@ -9,20 +9,9 @@ var ApiUtil = {
       dataType: 'json',
       success: function(data) {
         ApiActions.getBreweries(data);
-      }
-    });
-  },
-
-  getBeers: function(brewery) {
-    $.ajax({
-      url: 'api/beers' ,
-      type: 'GET',
-      data: brewery,
-      dataType: 'json',
-      success: function(data) {
-        console.log(data);
-        // ApiActions.updateBeersInStore(data);
-        console.log('got the beers!');
+      },
+      error: function(error) {
+        console.log('error fetching database');
       }
     });
   },
@@ -33,7 +22,6 @@ var ApiUtil = {
       type: 'POST',
       data: data,
       success: function(data) {
-        console.log('success!');
         ApiActions.addBrewery(data);
       },
       error: function(error) {
@@ -50,15 +38,55 @@ var ApiUtil = {
       dataType: 'json',
       data: data,
       success: function(data) {
-        console.log('updated!');
+        // console.log('updated!');
         ApiActions.updateBrewery(data);
       },
       error: function(error) {
         console.log('error updating');
       }
     });
-  }
+  },
 
+  getBeers: function(brewery) {
+    $.ajax({
+      url: 'api/beers' ,
+      type: 'GET',
+      data: brewery,
+      dataType: 'json',
+      success: function(data) {
+        ApiActions.updateBeersInStore(data);
+      },
+      error: function(error) {
+        console.log('error getting beers...');
+      }
+    });
+  },
+
+  postBeer: function(beer) {
+    $.ajax({
+      url: 'api/beers',
+      type: 'POST',
+      data: beer,
+      success: function(data) {
+        ApiActions.addNewBeerToStore(data);
+      },
+      error: function(error) {
+        console.log('error adding beer');
+      }
+    });
+  },
+
+  patchBeer: function(beer) {
+    $.ajax({
+      url: 'api/beers/' + beer._id,
+      type: 'PATCH',
+      dataType: 'json',
+      data: beer,
+      success: function(data) {
+        ApiActions.updateBeersInStore(data);
+      }
+    });
+  }
 };
 
 module.exports = ApiUtil;

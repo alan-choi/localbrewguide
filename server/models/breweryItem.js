@@ -7,6 +7,7 @@ const BreweryItemSchema = {
   city: String,
   state: String,
   zip: String,
+  neighborhood: String,
   website: String
 };
 
