@@ -31,11 +31,15 @@
     "lodash": "^3.10.1",
     "mongoose": "^4.3.1",
     "node-sass": "^3.4.2",
+    "passport": "^0.3.2",
     "react": "^0.14.3",
     "react-addons-linked-state-mixin": "^0.14.6",
     "react-dom": "^0.14.3",
+    "react-mixin": "^3.0.3",
+    "reqwest": "^2.0.5",
     "sass-loader": "^3.1.2",
-    "skeleton-css": "^2.0.4"
+    "skeleton-css": "^2.0.4",
+    "when": "^3.7.7"
   },
   "devDependencies": {
     "babel-cli": "^6.3.15",

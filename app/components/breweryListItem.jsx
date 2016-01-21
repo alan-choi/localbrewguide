@@ -14,7 +14,7 @@ class breweryListItem extends React.Component {
       this.props.fillBreweryForm(this.props.brewery);
     } else {
       ApiActions.changeSelectedBrewery(this.props.brewery._id);
-      ApiUtil.getBeers(this.props.brewery);
+      ApiUtil.getBeers({id: this.props.brewery._id});
     }
   }
 
@@ -28,6 +28,7 @@ class breweryListItem extends React.Component {
           <li>{ beerSummary.abv }</li>
           <li>{ beerSummary.ibu}</li>
           <li>{ beerSummary.mostCommon }</li>
+          <li>{ this.props.brewery.beers.length }</li>
         </ul>
        </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import GenForm from './genForm';
 import Beer from './beerItem';
-import BeerStore from './../stores/BeerStore';
+import BeerStore from './../stores/beerStore';
 
 class BreweryDetail extends React.Component {
   constructor(props) {
@@ -19,7 +19,6 @@ class BreweryDetail extends React.Component {
 
   componentWillReceiveProps(newProps) {
     console.log('detailed brewery props');
-    // console.log(newProps.beers);
   }
 
   changeSelectedBeer() {
@@ -28,11 +27,6 @@ class BreweryDetail extends React.Component {
   }
 
   render() {
-    // var beerForm = (this.props.editMode ?
-    //   <GenForm
-    //     fieldNames={['beerName', 'beerType', 'abv', 'ibu']}
-    //     brewery={ this.props.brewery } /> : ""
-    // );
     var beerForm = (<GenForm
         fieldNames={['beerName', 'beerType', 'abv', 'ibu']}
         editMode={ this.props.editMode }

@@ -58,7 +58,8 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
         break;
       case BreweryConstants.ADD_BREWERY:
         // console.log('adding brewery');
-        BreweryStore.updateBrewery(payload.brewery);
+        BreweryStore.addBreweries([payload.brewery]);
+        // BreweryStore.updateBrewery(payload.brewery);
         BreweryStore.emit(CHANGE_EVENT);
         break;
       case BreweryConstants.UPDATE_SELECTED_BREWERY:

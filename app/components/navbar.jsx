@@ -5,7 +5,14 @@ var Navbar = React.createClass({
   render: function() {
     return (
       <div className='navbar'>
-        <div className='logo'>Local Brew Guide</div>
+        <div>
+        <h1>Local Brew Guide</h1>
+        <ul>
+          <li>Learn</li>
+          <li>Plan</li>
+          <li>About</li>
+        </ul>
+      </div>
       </div>
     );
   }

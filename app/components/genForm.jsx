@@ -30,6 +30,7 @@ class genForm extends React.Component {
       ApiUtil.postBeer(item);
     }
     this.setState({ submitted: true });
+    this.setState({ submitted: false });
   }
 
   listenToTyping() {

@@ -6,6 +6,7 @@ import BreweryDetail from './breweryDetail';
 import BreweryStore from './../stores/breweryStore';
 import BeerStore from './../stores/beerStore';
 import GenForm from './genForm';
+import ApiUtil from './../utils/apiUtil';
 
 class App extends React.Component {
   constructor() {
@@ -23,6 +24,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
+    ApiUtil.getBreweries();
     BeerStore.addChangeListener(this.getBeersFromStore);
     BeerStore.addUpdateListener(this.updateBeerList);
     BreweryStore.addChangeListener(this.onInitialLoad);
@@ -43,7 +45,6 @@ class App extends React.Component {
   onInitialLoad() {
     console.log('getting breweries from store');
     var breweries = BreweryStore.getBreweries();
-    console.log(breweries);
     this.setState({ breweries: breweries });
   }
 
@@ -72,10 +73,7 @@ class App extends React.Component {
       brewery={ this.state.selectedBrewery }/>
   );
     var editText = (this.state.editMode ? "close" : "edit mode");
-    // var breweryForm = (this.state.editMode ?
-    //   <BreweryForm
-    //     editMode={ this.state.editMode }
-    //     brewery={ this.state.selectedBrewery }/> : "");
+
     var breweryForm = (<BreweryForm
         editMode={ this.state.editMode }
         brewery={ this.state.selectedBrewery }/>);

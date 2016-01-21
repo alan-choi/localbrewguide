@@ -15,8 +15,21 @@ p {
   border-bottom: 1px solid black;
   line-height: 60px;
   padding-left: 5px;
-  font-size: 30px;
+  font-size: 16px;
   text-align: center;
+  h1{
+    float: left;
+    width: 200px;
+  }
+  ul {
+    float: left;
+
+    li {
+      float: left;
+      display: block;
+      margin: 0px 20px;
+    }
+  }
 }
 
 .brewery-container {
@@ -39,13 +52,13 @@ p {
   margin-top: 20px;
   margin-bottom: 10px;
   width: 800px;
-  height: 201px;
+  height: 400px;
   border: 1px solid gray;
   box-sizing: border-box;
 
   .scroll-area {
     overflow-y: scroll;
-    height: 160px;
+    height: 360px;
   }
   .list-head{
     line-height: 40px;
@@ -63,6 +76,7 @@ p {
   }
 
   li:first-child {
+    margin-left: 10px;
     width: 200px;
   }
 
@@ -160,6 +174,7 @@ p {
     }
 
     li:first-child{
+      margin-left: 10px;
       width: 300px
     }
     li {
@@ -177,6 +192,11 @@ p {
   }
   form {
     width: 700px;
-    margin: 5px auto;;
+    margin: 5px auto;
+
+    input{
+      height: 24px;
+      font-size: 16px;
+    }
   }
 }

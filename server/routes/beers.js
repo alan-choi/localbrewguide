@@ -7,7 +7,7 @@ const beerRouter = express.Router({
 
 beerRouter.route('/')
   .get((req, res, next) => {
-    let id = req.query._id;
+    let id = req.query.id;
     BeerItem.find({ breweryId: id })
       .then((items) => {
         res.send(items);

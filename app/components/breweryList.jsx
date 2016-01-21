@@ -28,6 +28,7 @@ class BreweryList extends React.Component {
             <li>ABV</li>
             <li>IBU</li>
             <li>Common Beer</li>
+            <li>Beer Count</li>
           </ul>
         </div>
         <div className="scroll-area">

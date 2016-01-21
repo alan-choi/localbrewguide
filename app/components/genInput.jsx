@@ -13,6 +13,7 @@ class GenInput extends React.Component {
   componentWillReceiveProps(newProps) {
     var brewery = newProps.brewery;
     var beer = newProps.beer;
+
     if (newProps.submitted || !newProps.editMode) {
       this.setState({ text: "" });
     } else if(newProps.editMode && beer !== 'empty beer') {
@@ -23,7 +24,7 @@ class GenInput extends React.Component {
   }
 
   handleChange(event) {
-    this.props.listenToTyping();
+    // this.props.listenToTyping();
     this.setState({ text : event.target.value });
   }
 
@@ -40,6 +41,5 @@ class GenInput extends React.Component {
     );
   }
 }
-// });
+
 export default GenInput;
-// module.exports = GenInput;

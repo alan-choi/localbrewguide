@@ -2,7 +2,7 @@ import $ from 'jquery';
 import ApiActions from './../actions/apiActions';
 
 var ApiUtil = {
-  loadDatabase: function() {
+  getBreweries: function() {
     $.ajax({
       url: '/api/breweries',
       type: 'GET',
@@ -22,7 +22,8 @@ var ApiUtil = {
       type: 'POST',
       data: data,
       success: function(data) {
-        ApiActions.addBrewery(data);
+        ApiUtil.getBreweries();
+        // ApiActions.addBrewery(data);
       },
       error: function(error) {
         console.log('error ' + error);
@@ -47,11 +48,11 @@ var ApiUtil = {
     });
   },
 
-  getBeers: function(brewery) {
+  getBeers: function(id) {
     $.ajax({
       url: 'api/beers' ,
       type: 'GET',
-      data: brewery,
+      data: id,
       dataType: 'json',
       success: function(data) {
         ApiActions.updateBeersInStore(data);
@@ -68,7 +69,8 @@ var ApiUtil = {
       type: 'POST',
       data: beer,
       success: function(data) {
-        ApiActions.addNewBeerToStore(data);
+        ApiUtil.getBeers({id: data.breweryId});
+        // ApiActions.addNewBeerToStore(data);
       },
       error: function(error) {
         console.log('error adding beer');
