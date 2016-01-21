@@ -66,25 +66,28 @@ class App extends React.Component {
   }
 
   render() {
-    var breweryDetail = (Object.keys(this.state.selectedBrewery).length === 0 ? <div></div> :
+    var selectedBrew = this.state.selectedBrewery;
+    var selected = (Object.keys(selectedBrew).length === 0 ? { _id: ""} : selectedBrew);
+    var breweryDetail = (Object.keys(selectedBrew).length === 0 ? <div></div> :
     <BreweryDetail
       editMode={ this.state.editMode }
       beers = { this.state.beers }
       brewery={ this.state.selectedBrewery }/>
   );
-    var editText = (this.state.editMode ? "close" : "edit mode");
+    // var editText = (this.state.editMode ? "close" : "edit mode");
+    // <button onClick={ this.toggleEditMode }>{ editText }</button>
 
-    var breweryForm = (<BreweryForm
-        editMode={ this.state.editMode }
-        brewery={ this.state.selectedBrewery }/>);
+    // var breweryForm = (<BreweryForm
+    //     editMode={ this.state.editMode }
+    //     brewery={ this.state.selectedBrewery }/>);
+    //     { breweryForm }
 
     return (
       <div>
         <Navbar />
-        <button onClick={ this.toggleEditMode }>{ editText }</button>
         <div className="brewery-container">
-          { breweryForm }
           <BreweryList
+            selectedBrewery={ selected }
             breweries={ this.state.breweries }
             editMode={ this.state.editMode }
             fillBreweryForm={ this.updateSelectedBrewery }/>

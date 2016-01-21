@@ -12,28 +12,38 @@ p {
 .navbar {
   display: block;
   height: 60px;
-  border-bottom: 1px solid black;
-  line-height: 60px;
+  // border-bottom: 1px solid black;
+  line-height: 70px;
   padding-left: 5px;
   font-size: 16px;
   text-align: center;
+
+  section {
+    width: 980px;
+    margin: 0 auto;
+  }
   h1{
+    color: #003366;
     float: left;
     width: 200px;
+    font-size: 24px;
+    font-weight: 400;
   }
   ul {
-    float: left;
+    float: right;
 
     li {
+      color: #006666;
       float: left;
       display: block;
+      font-size: 20px;
       margin: 0px 20px;
     }
   }
 }
 
 .brewery-container {
-  width: 900px;
+  width: 980px;
   margin: auto;
 }
 
@@ -48,77 +58,105 @@ p {
 }
 
 .brewery-list {
-  float: left;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  width: 800px;
+  position: relative;
+  margin: 20px auto;
+  max-width: 600px;
   height: 400px;
-  border: 1px solid gray;
-  box-sizing: border-box;
-
-  .scroll-area {
-    overflow-y: scroll;
-    height: 360px;
-  }
-  .list-head{
-    line-height: 40px;
-    font-size: 16px;
-    font-weight: 500;
-  }
   ul {
     padding: none;
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid gray;
     box-sizing: border-box;
     height: 40px;
     margin: 0px;
   }
 
+  li{
+    text-align: center;
+    width: 100px;
+  }
   li:first-child {
-    margin-left: 10px;
-    width: 200px;
+    text-align: left;
+    margin-left: 15px;
+    width: 250px;
   }
 
-  li {
-    width: 120px;
-    display: inline-block;
+  li:nth-child(2) {
+    width: 150px;
+  }
+
+  .scroll-area {
+    overflow-y: scroll;
+    height: 360px;
+    .brewery-item{
+      &.highlight{
+        color: white;
+        background-color: #336699;
+      }
+    }
+  }
+
+  .list-head{
+    border-bottom: 1px solid gray;
+    line-height: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    text-indent: -15px;
+
+    li:first-child{
+      text-indent: 0px;
+    }
+  }
+
+  .brewery-item {
+    font-size: 14px;
+    line-height: 40px;
+    box-sizing: border-box;
+
+    &:nth-child(even) {
+      background-color: #e3e3e3;
+    }
+  }
+
+  .brewery-item:hover {
+    background-color: #2D8AD1;
+    cursor: pointer;
+  }
+  .private {
+    color: #8D1616;
   }
 }
-
-.brewery-item {
-  width: 800px;
-  font-size: 14px;
-  line-height: 40px;
-  // padding: 0px 10px 0px 10px;
-  box-sizing: border-box;
-}
-
-.brewery-item:hover {
-  background-color: #197588;
-  cursor: pointer;
-}
+// .scroll-area::after{
+//   position: absolute;
+//   bottom: -80px;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   margin: 30px auto;
+//   width: 980px;
+//   content: "";
+//   height: 1px;
+//   background-color: gray;
+// }
 
 .brewery-detail{
   position: relative;
-  float: left;
-  border: 1px solid black;
   width: 800px;
-  height: 500px;
+  height: 800px;
+  margin: 30px auto;
 
   .brewery-name {
     text-align: center;
-    margin-top: 20px;
-    font-size: 24px;
+    margin-top: 30px;
+    font-size: 40px;
   }
   .brewery-neighborhood{
     text-align: center;
-    font-size: 12px;
+    font-size: 18px;
   }
   .brewery-website{
     text-align: center;
-    font-size: 10px;
-    margin-bottom: 20px;
+    font-size: 14px;
+    margin-bottom: 30px;
 
   }
   .major-stat {
@@ -147,13 +185,9 @@ p {
     font-size: 30px;
   }
   .beer-list {
-    position: absolute;
-    bottom: 20px;
-    width: 700px;
+    width: 400px;
     height: 200px;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 1px solid black;
+    // border: 1px solid black;
     font-size: 14px;
     line-height: 25px;
 
@@ -175,20 +209,26 @@ p {
 
     li:first-child{
       margin-left: 10px;
-      width: 300px
+      width: 150px;
+      text-align: left;
     }
-    li {
+    li:nth-child(2){
       width: 100px;
-      display: inline-block;
+    }
+
+    li {
+      float: left;
+      text-align: center;
+      width: 50px;
+    }
+    ul{
+      float: left;
+    }
+    ul:nth-child(even) {
       height: 25px;
+      background-color: #e3e3e3;
     }
-    ul {
-      padding: 5px;
-      display: flex;
-      flex-direction: row;
-      border-bottom: 1px solid gray;
-      margin: 0px;
-    }
+
   }
   form {
     width: 700px;

@@ -9,10 +9,12 @@ class BreweryList extends React.Component {
   render() {
     let breweries = [];
     for (var brewery in this.props.breweries) {
+      let selected = this.props.selectedBrewery._id === brewery;
       let currentBrew = this.props.breweries[brewery];
       let editMode = this.props.editMode;
       breweries.push(
         <BreweryListItem
+          selected={ selected }
           key={ currentBrew.name + currentBrew._id }
           brewery={ currentBrew }
           editMode={ editMode }
@@ -26,8 +28,6 @@ class BreweryList extends React.Component {
             <li>Name</li>
             <li>Neighborhood</li>
             <li>ABV</li>
-            <li>IBU</li>
-            <li>Common Beer</li>
             <li>Beer Count</li>
           </ul>
         </div>

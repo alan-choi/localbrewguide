@@ -27,11 +27,12 @@ class BreweryDetail extends React.Component {
   }
 
   render() {
-    var beerForm = (<GenForm
-        fieldNames={['beerName', 'beerType', 'abv', 'ibu']}
-        editMode={ this.props.editMode }
-        beer={ this.state.selectedBeer }
-        brewery={ this.props.brewery } />);
+    // var beerForm = (<GenForm
+    //     fieldNames={['beerName', 'beerType', 'abv', 'ibu']}
+    //     editMode={ this.props.editMode }
+    //     beer={ this.state.selectedBeer }
+    //     brewery={ this.props.brewery } />);
+    //     { beerForm }
     var beers = [];
 
     for (var beer in this.props.beers) {
@@ -61,7 +62,6 @@ class BreweryDetail extends React.Component {
             <p>Total Beers</p>
           </div>
         </div>
-        { beerForm }
         <br />
         <div className="beer-list">
           <div className="beerlist-header">
