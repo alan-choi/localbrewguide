@@ -31,3 +31,8 @@ node_modules
 # Do not commit dist/ built files
 dist
 lib
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
