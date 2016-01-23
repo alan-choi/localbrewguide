@@ -1,0 +1,245 @@
+  @import url(https://fonts.googleapis.com/css?family=Hind:400,300,500,600);
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-family: Hind;
+    color: black;
+  }
+
+  p {
+    margin: 0px
+  }
+
+  .navbar {
+    display: block;
+    height: 60px;
+    line-height: 70px;
+    padding-left: 5px;
+    font-size: 16px;
+    text-align: center;
+
+    h1{
+      color: #003366;
+      // float: left;
+      width: 200px;
+      font-size: 24px;
+      text-align: center;
+      font-weight: 400;
+    }
+    ul {
+      display: none;
+      float: right;
+
+      li {
+        color: #006666;
+        float: left;
+        display: block;
+        font-size: 14px;
+        margin: 0px 20px;
+      }
+    }
+  }
+
+  .brewery-container {
+    width: 100%;
+    margin: auto;
+  }
+
+  .brewery-form {
+    float: left;
+    font-size: 12px;
+  }
+  .brewery-form {
+    input {
+      margin: 5px;
+    }
+  }
+
+  .brewery-list {
+    position: relative;
+    margin: 20px auto;
+    max-width: 100%;
+    height: 400px;
+
+    ul {
+      padding: none;
+      display: flex;
+      flex-direction: row;
+      box-sizing: border-box;
+      height: 40px;
+      margin: 0px;
+    }
+
+    li{
+      text-align: center;
+      width: 20%;
+    }
+    li:first-child {
+      text-align: left;
+      margin-left: 15px;
+      width: 30%;
+    }
+
+    li:nth-child(2) {
+      width: 30%;
+    }
+
+    .scroll-area {
+      overflow-y: scroll;
+      height: 360px;
+      .item{
+        &.highlight{
+          color: white;
+          background-color: #336699;
+        }
+      }
+    }
+
+    .list-head{
+      border-bottom: 1px solid gray;
+      line-height: 50px;
+      font-size: 14px;
+      font-weight: 500;
+      text-indent: -15px;
+
+      li:first-child{
+        text-indent: 0px;
+      }
+    }
+
+    .item {
+      font-size: 14px;
+      line-height: 40px;
+      box-sizing: border-box;
+
+      &:nth-child(even) {
+        background-color: #e3e3e3;
+      }
+    }
+
+    .item:hover {
+      background-color: #2D8AD1;
+      cursor: pointer;
+    }
+    .private {
+      color: #8D1616;
+    }
+  }
+  // .scroll-area::after{
+  //   position: absolute;
+  //   bottom: -80px;
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   margin: 30px auto;
+  //   width: 980px;
+  //   content: "";
+  //   height: 1px;
+  //   background-color: gray;
+  // }
+
+  .brewery-detail{
+    position: relative;
+    width: 100%;
+    height: 800px;
+    margin: 30px auto;
+
+    .brewery-name {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 30px;
+    }
+    .brewery-neighborhood{
+      text-align: center;
+      font-size: 18px;
+    }
+    .brewery-website{
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 30px;
+
+    }
+    .major-stat {
+      position: relative;
+      flex-grow: 1;
+      width: 33%;
+      height: 100px;
+      line-height: 75px;
+      text-align: center;
+      background-color: #336699;
+      color: white;
+
+      p {
+        position: absolute;
+        line-height: 12px;
+        left: 50%;
+        top:60%;
+        transform: translate(-50%, -20%);
+        height: 10px;
+        font-size: 12px
+      }
+    }
+    .stats {
+      display: flex;
+      flex-direction: row;
+      font-size: 30px;
+    }
+    .beer-list {
+      width: 100%;
+      height: 200px;
+      // border: 1px solid black;
+      font-size: 14px;
+      line-height: 25px;
+      float: left;
+
+      .beerlist-header {
+        font-size: 16px;
+        font-weight: 500;
+        height: 30px;
+        border-bottom: 1px solid gray;
+        line-height: 30px;
+        ul {
+          border: none;
+        }
+      }
+
+      .beerlist-scroll {
+        width: 100%;
+        height: 170px;
+        overflow-y: scroll;
+      }
+
+      li:first-child{
+        margin-left: 10px;
+        width: 35%;
+        text-align: left;
+      }
+      // li:nth-child(2){
+      //   width: 30%;
+      // }
+
+      li {
+        float: left;
+        text-align: center;
+        width: 20%;
+      }
+      ul{
+        width: 100%;
+        float: left;
+      }
+      ul:nth-child(even) {
+        height: 25px;
+        background-color: #e3e3e3;
+      }
+
+    }
+    form {
+      width: 700px;
+      margin: 5px auto;
+
+      input{
+        height: 24px;
+        font-size: 16px;
+      }
+    }
+  }
+}

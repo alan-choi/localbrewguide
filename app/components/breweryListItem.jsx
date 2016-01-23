@@ -19,20 +19,16 @@ class breweryListItem extends React.Component {
   }
 
   render() {
-    let beerSummary = this.props.brewery.beerSummary;
+    let brewDetails = this.props.brewery.brewDetails;
     let redText = (this.props.brewery.neighborhood === 'Private' ? 'private' : '');
     let highlight = (this.props.selected ? "highlight": "");
     return (
-      <div
-        className={ 'brewery-item '+ highlight }
-        onClick={ this.handleClick }>
-        <ul>
+        <ul className={'item ' + highlight } onClick={this.handleClick}>
           <li>{ this.props.brewery.name }</li>
           <li className={ redText }>{ this.props.brewery.neighborhood }</li>
-          <li>{ beerSummary.abv }</li>
+          <li>{ brewDetails.stats.abv }</li>
           <li>{ this.props.brewery.beers.length }</li>
         </ul>
-       </div>
     );
   }
 }

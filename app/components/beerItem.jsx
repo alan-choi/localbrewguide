@@ -8,12 +8,12 @@ class Beer extends React.Component {
   }
   handleClick(event) {
     event.preventDefault();
-    ApiActions.changeSelectedBeer(this.props.beer);
+    // ApiActions.changeSelectedBeer(this.props.beer);
   }
 
   render() {
     return (
-      <ul onClick={ this.handleClick }>
+      <ul className='item' onClick={ this.handleClick }>
         <li>{this.props.beer.beerName}</li>
         <li>{this.props.beer.beerType}</li>
         <li>{this.props.beer.abv}</li>

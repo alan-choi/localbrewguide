@@ -2,6 +2,7 @@ import React from 'react';
 import GenForm from './genForm';
 import Beer from './beerItem';
 import BeerStore from './../stores/beerStore';
+import BeerBarChart from './beerBarChart';
 
 class BreweryDetail extends React.Component {
   constructor(props) {
@@ -34,7 +35,6 @@ class BreweryDetail extends React.Component {
     //     brewery={ this.props.brewery } />);
     //     { beerForm }
     var beers = [];
-
     for (var beer in this.props.beers) {
       beers.push(
         <Beer
@@ -45,16 +45,16 @@ class BreweryDetail extends React.Component {
     }
     return(
       <div className="brewery-detail">
-        <div className="brewery-name">{ this.props.brewery.name }</div>
+        <h1 className="brewery-name">{ this.props.brewery.name }</h1>
         <div className="brewery-neighborhood">{ this.props.brewery.neighborhood }</div>
         <div className="brewery-website"><a href={'http://'+this.props.brewery.website} target="_blank" >website</a></div>
         <div className="stats">
           <div className="major-stat">
-            { this.props.brewery.beerSummary.abv }
+            { this.props.brewery.brewDetails.stats.abv }
             <p>ABV</p>
           </div>
           <div className="major-stat">
-            { this.props.brewery.beerSummary.ibu }
+            { this.props.brewery.brewDetails.stats.ibu }
             <p>IBU</p>
           </div>
           <div className="major-stat">
@@ -62,20 +62,25 @@ class BreweryDetail extends React.Component {
             <p>Total Beers</p>
           </div>
         </div>
-        <br />
-        <div className="beer-list">
-          <div className="beerlist-header">
-            <ul>
-              <li>Name</li>
-              <li>Type</li>
-              <li>ABV</li>
-              <li>IBU</li>
-            </ul>
+        <BeerBarChart brewery={this.props.brewery} />
+        <section>
+          <div className="list">
+            <h2>Beer List</h2>
+            <div className="list-head">
+              <ul>
+                <li>Name</li>
+                <li>Type</li>
+                <li>ABV</li>
+                <li>IBU</li>
+              </ul>
+            </div>
+            <div className="beerlist">
+              { beers }
+            </div>
           </div>
-          <div className="beerlist-scroll">
-            { beers }
-          </div>
-        </div>
+
+        </section>
+
       </div>
     );
   }

@@ -22,7 +22,7 @@ class BreweryList extends React.Component {
       );
     }
     return (
-      <div className="brewery-list">
+      <div className="list">
         <div className="list-head">
           <ul>
             <li>Name</li>
@@ -31,7 +31,7 @@ class BreweryList extends React.Component {
             <li>Beer Count</li>
           </ul>
         </div>
-        <div className="scroll-area">
+        <div className="brewerylist">
           { breweries }
         </div>
       </div>

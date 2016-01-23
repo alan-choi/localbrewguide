@@ -7,7 +7,7 @@ const breweryRouter = express.Router({
 });
 
 var summarizeBeers = function(beers) {
-  let beerSummary = {};
+  let brewDetails = { summary: {}, stats: {} };
   let mostCommon = '';
   let max = 0;
   let abvSum = 0;
@@ -16,19 +16,20 @@ var summarizeBeers = function(beers) {
     abvSum += beer.abv;
     ibuSum += beer.ibu;
     let beerType = beer.beerType;
-    if (typeof beerSummary[beerType] === 'undefined') {
-      beerSummary[beerType] = 1;
+    if (typeof brewDetails.summary[beerType] === 'undefined') {
+      brewDetails.summary[beerType] = 1;
     } else {
-      beerSummary[beerType] += 1;
-      if (beerSummary[beerType] > max) {
-        max = beerSummary[beerType];
-        beerSummary.mostCommon = beerType;
+      brewDetails.summary[beerType] += 1;
+      if (brewDetails.summary[beerType] > max) {
+        max = brewDetails.summary[beerType];
+        brewDetails.stats.mostCommon = beerType;
       }
     }
   });
-  beerSummary.abv = (abvSum/beers.length).toFixed(2);
-  beerSummary.ibu = (ibuSum/beers.length).toFixed(2);
-  return beerSummary;
+  // console.log(brewDetails.summary);
+  brewDetails.stats.abv = (abvSum/beers.length).toFixed(2);
+  brewDetails.stats.ibu = (ibuSum/beers.length).toFixed(2);
+  return brewDetails;
 };
 
 breweryRouter.route('/')
@@ -43,7 +44,7 @@ breweryRouter.route('/')
         let beers = BeerItem.find({ breweryId: brewery._id }).lean().exec((error, beers) => {
           counter += 1;
           brewery.beers = beers;
-          brewery.beerSummary = summarizeBeers(beers);
+          brewery.brewDetails = summarizeBeers(beers);
           if (counter === breweries.length) {
             res.send(breweries);
           }

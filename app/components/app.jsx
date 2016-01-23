@@ -86,6 +86,7 @@ class App extends React.Component {
       <div>
         <Navbar />
         <div className="brewery-container">
+          <h2>SF Breweries (city)</h2>
           <BreweryList
             selectedBrewery={ selected }
             breweries={ this.state.breweries }

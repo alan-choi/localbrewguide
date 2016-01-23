@@ -5,7 +5,6 @@ var Navbar = React.createClass({
   render: function() {
     return (
       <div className='navbar'>
-        <section>
           <h1>Local Brew Guide</h1>
           <ul>
             <li>Search</li>
@@ -13,7 +12,6 @@ var Navbar = React.createClass({
             <li>Plan</li>
             <li>About</li>
           </ul>
-        </section>
       </div>
     );
   }

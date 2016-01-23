@@ -1,27 +1,21 @@
 @import url(https://fonts.googleapis.com/css?family=Hind:400,300,500,600);
-
+@media only screen and (min-width:600px) {
 body {
   font-family: Hind;
   color: black;
 }
 
-p {
-  margin: 0px
-}
-
 .navbar {
+  width: 980px;
+  margin: 0px auto;
   display: block;
   height: 60px;
-  // border-bottom: 1px solid black;
   line-height: 70px;
   padding-left: 5px;
   font-size: 16px;
   text-align: center;
 
-  section {
-    width: 980px;
-    margin: 0 auto;
-  }
+
   h1{
     color: #003366;
     float: left;
@@ -45,7 +39,16 @@ p {
 .brewery-container {
   width: 980px;
   margin: auto;
+  text-align: center;
+
+  h2 {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin: 10px;
+    color: gray;
+  }
 }
+
 
 .brewery-form {
   float: left;
@@ -56,12 +59,19 @@ p {
     margin: 5px;
   }
 }
+.brewerylist {
+  height: 400px;
+  overflow-y: scroll;
+}
 
-.brewery-list {
-  position: relative;
+.list {
   margin: 20px auto;
   max-width: 600px;
-  height: 400px;
+  text-align: center;
+  h2 {
+    font-size: 1.5em;
+    font-weight: 400;
+  }
   ul {
     padding: none;
     display: flex;
@@ -73,22 +83,19 @@ p {
 
   li{
     text-align: center;
-    width: 100px;
+    width: 20%;
   }
+
   li:first-child {
     text-align: left;
     margin-left: 15px;
-    width: 250px;
-  }
-
-  li:nth-child(2) {
-    width: 150px;
+    width: 35%;
   }
 
   .scroll-area {
     overflow-y: scroll;
-    height: 360px;
-    .brewery-item{
+    // height: 360px;
+    .item{
       &.highlight{
         color: white;
         background-color: #336699;
@@ -108,7 +115,7 @@ p {
     }
   }
 
-  .brewery-item {
+  .item {
     font-size: 14px;
     line-height: 40px;
     box-sizing: border-box;
@@ -118,47 +125,44 @@ p {
     }
   }
 
-  .brewery-item:hover {
+  .item:hover {
     background-color: #2D8AD1;
     cursor: pointer;
   }
+
   .private {
     color: #8D1616;
   }
 }
-// .scroll-area::after{
-//   position: absolute;
-//   bottom: -80px;
-//   left: 50%;
-//   transform: translateX(-50%);
-//   margin: 30px auto;
-//   width: 980px;
-//   content: "";
-//   height: 1px;
-//   background-color: gray;
-// }
 
 .brewery-detail{
   position: relative;
   width: 800px;
-  height: 800px;
   margin: 30px auto;
+
+  .beerlist {
+    height: 200px;
+    overflow-y: scroll;
+  }
 
   .brewery-name {
     text-align: center;
     margin-top: 30px;
     font-size: 40px;
+    font-weight: 400;
   }
+
   .brewery-neighborhood{
     text-align: center;
     font-size: 18px;
   }
+
   .brewery-website{
     text-align: center;
     font-size: 14px;
     margin-bottom: 30px;
-
   }
+
   .major-stat {
     position: relative;
     flex-grow: 1;
@@ -168,6 +172,7 @@ p {
     text-align: center;
     background-color: #336699;
     color: white;
+    border:2px solid white;
 
     p {
       position: absolute;
@@ -179,57 +184,13 @@ p {
       font-size: 12px
     }
   }
+
   .stats {
     display: flex;
     flex-direction: row;
     font-size: 30px;
   }
-  .beer-list {
-    width: 400px;
-    height: 200px;
-    // border: 1px solid black;
-    font-size: 14px;
-    line-height: 25px;
 
-    .beerlist-header {
-      font-size: 16px;
-      font-weight: 500;
-      height: 30px;
-      border-bottom: 1px solid gray;
-      line-height: 30px;
-      ul {
-        border: none;
-      }
-    }
-
-    .beerlist-scroll {
-      height: 170px;
-      overflow-y: scroll;
-    }
-
-    li:first-child{
-      margin-left: 10px;
-      width: 150px;
-      text-align: left;
-    }
-    li:nth-child(2){
-      width: 100px;
-    }
-
-    li {
-      float: left;
-      text-align: center;
-      width: 50px;
-    }
-    ul{
-      float: left;
-    }
-    ul:nth-child(even) {
-      height: 25px;
-      background-color: #e3e3e3;
-    }
-
-  }
   form {
     width: 700px;
     margin: 5px auto;
@@ -239,4 +200,30 @@ p {
       font-size: 16px;
     }
   }
+}
+.pie-chart {
+  margin: 30px auto;
+  text-align: center;
+}
+
+.beerchart {
+  height: 300px;
+}
+
+.legend {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  li {
+    margin: 5px;
+    float: left;
+    p {
+      margin: 5px;
+      line-height: 20px;
+      float: left;
+    }
+  }
+}
+
 }

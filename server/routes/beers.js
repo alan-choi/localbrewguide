@@ -8,7 +8,10 @@ const beerRouter = express.Router({
 beerRouter.route('/')
   .get((req, res, next) => {
     let id = req.query.id;
-    BeerItem.find({ breweryId: id })
+    // console.log(typeof req.query.id === 'undefined');
+    let query = (typeof req.query.id === 'undefined'? {} : {breweryId: req.query.id} );
+    console.log(query);
+    BeerItem.find(query)
       .then((items) => {
         res.send(items);
       }, (error) => {
