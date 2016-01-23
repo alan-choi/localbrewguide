@@ -2,7 +2,7 @@
   "name": "localbrewguide",
   "version": "0.0.1",
   "description": "local brewery info",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "babel-node": "babel-node --presets react,es2015,stage-2",
     "dev": "gulp start:dev",

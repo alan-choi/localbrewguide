@@ -11,6 +11,6 @@ const BreweryItemSchema = {
   website: String
 };
 
-const BreweryItem = mongoose.model('BreweryItem', BreweryItemSchema, 'breweryItems');
+const BreweryItem = mongoose.model('BreweryItem', BreweryItemSchema, 'BreweryItems');
 
 export default BreweryItem;

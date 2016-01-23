@@ -20,7 +20,7 @@ var paths = {
     'node_modules/react-dom/dist/react-dom.js',
     'node_modules/jquery/dist/jquery.min.js'
   ],
-  scripts: ['gulpfile.js', 'index.js', 'server/**/*.js', 'app/**/*.js'],
+  scripts: ['gulpfile.js', 'app.js', 'server/**/*.js', 'app/**/*.js'],
   serverViews: ['./app/views/**/*.hbs'],
   clientScripts: ['app/**/*.js'],
   clientViews: ['./app/**/*.html'],
@@ -109,8 +109,8 @@ gulp.task('copy-vendor', function() {
 gulp.task('nodemon', function(cb) {
   var called = false;
   return nodemon({
-    script: 'index.js',
-    watch: ['index.js', 'server/', 'app/views/', 'app/components/'],
+    script: 'app.js',
+    watch: ['app.js', 'server/', 'app/views/', 'app/components/'],
     ext: "js jsx hbs",
     exec: "npm run babel-node",
     env: {

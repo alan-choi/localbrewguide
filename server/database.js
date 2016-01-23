@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
+import appconfig from './../appconfig';
 import BreweryItem from './models/breweryItem.js';
 import BeerItem from './models/beerItem.js';
 
-mongoose.connect('mongodb://localhost/localbrewguide');
+mongoose.connect('mongodb://'+appconfig.mongoID+':'+appconfig.mongoPW+'@ds049925.mongolab.com:49925/localbrewguide');
+// mongoose.connect('mongodb://localhost/localbrewguide');
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 
