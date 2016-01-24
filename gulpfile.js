@@ -20,7 +20,7 @@ var paths = {
     'node_modules/react-dom/dist/react-dom.js',
     'node_modules/jquery/dist/jquery.min.js'
   ],
-  scripts: ['gulpfile.js', 'app.js', 'server/**/*.js', 'app/**/*.js'],
+  serverScripts: ['gulpfile.js', 'app.js', 'server/**/*.js'],
   serverViews: ['./app/views/**/*.hbs'],
   clientScripts: ['app/**/*.js'],
   clientViews: ['./app/**/*.html'],
@@ -74,12 +74,12 @@ gulp.task('watch', ['cached-lint-watch']);
 // Babel task to build the .js for production
 // TODO: add minification
 gulp.task('build-server', function() {
-  return gulp.src(paths.scripts)
+  return gulp.src(paths.serverScripts)
     .pipe(sourcemaps.init())
     .pipe(babel({
-      presets: ['es2015', 'stage-2']
+      presets: ['react','es2015', 'stage-2']
     }))
-    .pipe(concat('all.js'))
+    .pipe(concat('app.js'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist/server'));
 });

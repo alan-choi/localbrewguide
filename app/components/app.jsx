@@ -21,6 +21,7 @@ class App extends React.Component {
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.getBeersFromStore = this.getBeersFromStore.bind(this);
     this.updateBeerList = this.updateBeerList.bind(this);
+    this.sortByAbv = this.sortByAbv.bind(this);
   }
 
   componentDidMount(){
@@ -74,6 +75,7 @@ class App extends React.Component {
       beers = { this.state.beers }
       brewery={ this.state.selectedBrewery }/>
   );
+
     // var editText = (this.state.editMode ? "close" : "edit mode");
     // <button onClick={ this.toggleEditMode }>{ editText }</button>
 
@@ -89,6 +91,7 @@ class App extends React.Component {
           <h2>SF Breweries (city)</h2>
           <BreweryList
             selectedBrewery={ selected }
+            sortByAbv={ this.sortByAbv }
             breweries={ this.state.breweries }
             editMode={ this.state.editMode }
             fillBreweryForm={ this.updateSelectedBrewery }/>

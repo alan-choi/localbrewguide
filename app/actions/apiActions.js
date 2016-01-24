@@ -63,7 +63,8 @@ var ApiActions = assign({}, Dispatcher.prototype, {
       brewery: data
     };
     Dispatcher.dispatch(payload);
-  }
+  },
+
 });
 
 module.exports = ApiActions;

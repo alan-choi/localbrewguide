@@ -2,11 +2,12 @@ import $ from 'jquery';
 import ApiActions from './../actions/apiActions';
 
 var ApiUtil = {
-  getBreweries: function() {
+  getBreweries: function(option = { sortBy: 'name', order: 1 }) {
     $.ajax({
       url: '/api/breweries',
       type: 'GET',
       dataType: 'json',
+      data: option,
       success: function(data) {
         ApiActions.getBreweries(data);
       },

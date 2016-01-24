@@ -113,6 +113,9 @@ body {
     li:first-child{
       text-indent: 0px;
     }
+    li:hover {
+      cursor: pointer;
+    }
   }
 
   .item {

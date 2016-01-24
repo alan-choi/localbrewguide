@@ -18,6 +18,7 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
   },
 
   addBreweries: function(newData) {
+      _breweries = {};
     newData.forEach(function(brewery) {
       _breweries[brewery._id] = brewery;
     });

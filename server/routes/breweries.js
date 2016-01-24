@@ -27,14 +27,17 @@ var summarizeBeers = function(beers) {
     }
   });
   // console.log(brewDetails.summary);
-  brewDetails.stats.abv = (abvSum/beers.length).toFixed(2);
-  brewDetails.stats.ibu = (ibuSum/beers.length).toFixed(2);
+  brewDetails.stats.abv = ((abvSum/beers.length) || 0).toFixed(2);
+  brewDetails.stats.ibu = ((ibuSum/beers.length)|| 0).toFixed(2);
+  brewDetails.stats.beercount = beers.length;
   return brewDetails;
 };
 
 breweryRouter.route('/')
   .get((req, res, next) => {
-    BreweryItem.find({}, null, {sort: {name: 1}}).lean().exec((error, breweries) => {
+    var sortBy = (req.query.order > 0 ? req.query.sortBy : '-' + req.query.sortBy);
+    console.log(sortBy);
+    BreweryItem.find().sort(sortBy).lean().exec((error, breweries) => {
       if (error){
         console.log('error getting data');
         res.status(500);
