@@ -21,7 +21,6 @@ class App extends React.Component {
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.getBeersFromStore = this.getBeersFromStore.bind(this);
     this.updateBeerList = this.updateBeerList.bind(this);
-    this.sortByAbv = this.sortByAbv.bind(this);
   }
 
   componentDidMount(){

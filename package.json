@@ -7,7 +7,7 @@
     "babel-node": "babel-node --presets react,es2015,stage-2",
     "dev": "gulp start:dev",
     "build": "gulp build-server",
-    "start": "node dist/server/app.js",
+    "start": "nodemon app.js",
     "test": "mocha ./tests"
   },
   "repository": {
@@ -36,12 +36,10 @@
     "react": "^0.14.3",
     "react-addons-linked-state-mixin": "^0.14.6",
     "react-chartjs": "jhudson8/react-chartjs",
-    "react-d3-tooltip": "^1.4.0",
     "react-dom": "^0.14.3",
     "react-mixin": "^3.0.3",
     "reqwest": "^2.0.5",
     "sass-loader": "^3.1.2",
-    "skeleton-css": "^2.0.4",
     "when": "^3.7.7"
   },
   "devDependencies": {
@@ -54,23 +52,9 @@
     "babel-preset-stage-2": "^6.3.13",
     "browser-sync": "^2.10.0",
     "css-loader": "^0.23.1",
-    "eslint-plugin-react": "^3.11.3",
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-babel": "^6.1.1",
-    "gulp-cached": "^1.1.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-eslint": "^1.1.1",
-    "gulp-file-cache": "0.0.1",
-    "gulp-filter": "^3.0.1",
-    "gulp-newer": "^1.1.0",
-    "gulp-nodemon": "^2.0.4",
-    "gulp-notify": "^2.2.0",
-    "gulp-plumber": "^1.0.1",
-    "gulp-sourcemaps": "^1.6.0",
     "nodemon": "^1.8.1",
+    "react-tools": "^0.13.3",
     "sass-loader": "^3.1.2",
-    "style": "0.0.3",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.9"
   }

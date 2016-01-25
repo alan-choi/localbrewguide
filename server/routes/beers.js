@@ -1,39 +1,39 @@
-import express from 'express';
-import BeerItem from './../models/beerItem.js';
+var express = require('express');
+var BeerItem = require('./../models/beerItem.js');
 
-const beerRouter = express.Router({
+var beerRouter = express.Router({
   mergeParams: true
 });
 
 beerRouter.route('/')
-  .get((req, res, next) => {
-    let id = req.query.id;
-    let query = (typeof req.query.id === 'undefined'? {} : {breweryId: req.query.id} );
+  .get(function(req, res, next) {
+    var id = req.query.id;
+    var query = (typeof req.query.id === 'undefined'? {} : {breweryId: req.query.id} );
     BeerItem.find(query)
-      .then((items) => {
+      .then(function(items) {
         res.send(items);
-      }, (error) => {
+      }, function(error) {
         console.error("Error getting data: ", error);
         next(error);
       });
   })
-  .post((req, res, next) => {
-    const beer = req.body;
+  .post(function(req, res, next) {
+    var beer = req.body;
     BeerItem.create(beer)
-    .then(() => {
+    .then(function() {
       console.log('successful post');
       res.status(200).send(beer);
-    }, (error) => {
+    }, function(error) {
       console.log("Error saving data: ", error);
       next(error);
     });
   });
 
   beerRouter.route('/:id')
-    .patch((req, res, next) => {
-      let id = req.params.id;
-      let beer = req.body;
-      BeerItem.findByIdAndUpdate(id, beer, (err, beer) => {
+    .patch(function(req, res, next) {
+      var id = req.params.id;
+      var beer = req.body;
+      BeerItem.findByIdAndUpdate(id, beer, function(err, beer) {
         if (err) {
           console.error('error updating data: ', err);
           res.status(500);
@@ -45,4 +45,4 @@ beerRouter.route('/')
       });
     });
 
-  export default beerRouter;
+  module.exports = beerRouter;

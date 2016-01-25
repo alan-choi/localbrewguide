@@ -1,15 +1,15 @@
-import mongoose from 'mongoose';
-import appconfig from './../appconfig';
-import BreweryItem from './models/breweryItem.js';
-import BeerItem from './models/beerItem.js';
+var mongoose = require('mongoose');
+var appconfig = require('./../appconfig');
+var BreweryItem = require('./models/breweryItem.js');
+var BeerItem = require('./models/beerItem.js');
 
 mongoose.connect('mongodb://'+appconfig.mongoID+':'+appconfig.mongoPW+'@ds049925.mongolab.com:49925/localbrewguide');
 // mongoose.connect('mongodb://localhost/localbrewguide');
 mongoose.Promise = global.Promise;
-const db = mongoose.connection;
+var db = mongoose.connection;
 
 function seedData() {
-  BreweryItem.count({}, (error, count) => {
+  BreweryItem.count({}, function(error, count) {
     if (error) { throw error; }
 
     if (count === 0) {
@@ -19,8 +19,8 @@ function seedData() {
       }, {
         name: "21st Amendment"
       }];
-      breweries.forEach((brewery) => {
-        BreweryItem.create(brewery, (error) = {
+      breweries.forEach(function(brewery) {
+        BreweryItem.create(brewery, function(error){
           if (error) { console.error(error); }
         });
       });
@@ -29,7 +29,7 @@ function seedData() {
 }
 
 db.on('error', console.error.bind(console, "connection error:"));
-db.once('open', () => {
+db.once('open', function() {
   console.log("connection to database established.");
   seedData();
 });

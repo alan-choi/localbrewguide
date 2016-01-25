@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+var mongoose = require('mongoose');
 
-const BeerItemSchema = {
+var BeerItemSchema = {
   id: String,
   breweryId: String,
   beerName: String,
@@ -9,6 +9,6 @@ const BeerItemSchema = {
   ibu: Number,
 };
 
-const BeerItem = mongoose.model('BeerItem', BeerItemSchema, 'BeerItems');
+var BeerItem = mongoose.model('BeerItem', BeerItemSchema, 'BeerItems');
 
-export default BeerItem;
+module.exports = BeerItem;
