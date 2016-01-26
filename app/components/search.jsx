@@ -7,8 +7,10 @@ import BreweryStore from './../stores/breweryStore';
 import BeerStore from './../stores/beerStore';
 import GenForm from './genForm';
 import ApiUtil from './../utils/apiUtil';
+import {Link} from 'react-router';
+import About from './about';
 
-class App extends React.Component {
+class Search extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -29,6 +31,13 @@ class App extends React.Component {
     BeerStore.addUpdateListener(this.updateBeerList);
     BreweryStore.addChangeListener(this.onInitialLoad);
     BreweryStore.addSelectedBreweryListener(this.updateSelectedBrewery);
+  }
+
+  componentWillUnmount() {
+    BeerStore.removeChangeListener(this.getBeersFromStore);
+    BeerStore.removeUpdateListener(this.updateBeerList);
+    BreweryStore.removeChangeListener(this.onInitialLoad);
+    BreweryStore.removeSelectedBreweryListener(this.updateSelectedBrewery);
   }
 
   updateSelectedBrewery(selection) {
@@ -66,6 +75,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.props.params);
     var selectedBrew = this.state.selectedBrewery;
     var selected = (Object.keys(selectedBrew).length === 0 ? { _id: ""} : selectedBrew);
     var breweryDetail = (Object.keys(selectedBrew).length === 0 ? <div></div> :
@@ -85,7 +95,6 @@ class App extends React.Component {
 
     return (
       <div>
-        <Navbar />
         <div className="brewery-container">
           <h2>SF Breweries (city)</h2>
           <BreweryList
@@ -100,4 +109,4 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+export default Search;

@@ -1,12 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Hind:400,300,500,600);
-@media only screen and (min-width:600px) {
+$breakpoint-small: 600px;
+$desktop-width: 980px;
+$cool-blue: #336699;
+$light-blue: #2D8AD1;
+$teal: #006666;
+$private-red: #8D1616;
+$bg-gray: #e3e3e3;
+
+@media only screen and (min-width:$breakpoint-small) {
 body {
   font-family: Hind;
   color: black;
 }
 
 .navbar {
-  width: 980px;
+  width: $desktop-width;
   margin: 0px auto;
   display: block;
   height: 60px;
@@ -15,9 +23,9 @@ body {
   font-size: 16px;
   text-align: center;
 
-
   h1{
-    color: #003366;
+    text-decoration: none;
+    color: $cool-blue;
     float: left;
     width: 200px;
     font-size: 24px;
@@ -27,17 +35,19 @@ body {
     float: right;
 
     li {
-      color: #006666;
+      color: $teal;
       float: left;
       display: block;
       font-size: 20px;
       margin: 0px 20px;
+      text-decoration: none;
+
     }
   }
 }
 
 .brewery-container {
-  width: 980px;
+  width: $desktop-width;
   margin: auto;
   text-align: center;
 
@@ -94,11 +104,11 @@ body {
 
   .scroll-area {
     overflow-y: scroll;
-    // height: 360px;
+
     .item{
       &.highlight{
         color: white;
-        background-color: #336699;
+        background-color: $cool-blue;
       }
     }
   }
@@ -124,21 +134,21 @@ body {
     box-sizing: border-box;
 
     &:nth-child(even) {
-      background-color: #e3e3e3;
+      background-color: $bg-gray;
     }
   }
 
   .item:hover {
-    background-color: #2D8AD1;
+    background-color: $light-blue;
     cursor: pointer;
   }
 
   .private {
-    color: #8D1616;
+    color: $private-red;
   }
 }
 
-.brewery-detail{
+.brewery-detail {
   position: relative;
   width: 800px;
   margin: 30px auto;
@@ -173,7 +183,7 @@ body {
     height: 100px;
     line-height: 75px;
     text-align: center;
-    background-color: #336699;
+    background-color: $cool-blue;
     color: white;
     border:2px solid white;
 
@@ -204,6 +214,7 @@ body {
     }
   }
 }
+
 .pie-chart {
   margin: 30px auto;
   text-align: center;

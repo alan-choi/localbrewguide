@@ -3,8 +3,8 @@ var appconfig = require('./../appconfig');
 var BreweryItem = require('./models/breweryItem.js');
 var BeerItem = require('./models/beerItem.js');
 
-mongoose.connect('mongodb://'+appconfig.mongoID+':'+appconfig.mongoPW+'@ds049925.mongolab.com:49925/localbrewguide');
-// mongoose.connect('mongodb://localhost/localbrewguide');
+// mongoose.connect('mongodb://'+appconfig.mongoID+':'+appconfig.mongoPW+'@ds049925.mongolab.com:49925/localbrewguide');
+mongoose.connect('mongodb://localhost/localbrewguide');
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 

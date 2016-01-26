@@ -41,12 +41,20 @@ var BeerStore = assign({}, EventEmitter.prototype, {
     this.on(CHANGE_EVENT, callback);
   },
 
+  removeChangeListener: function(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  },
+
   addSelectedBeerListener: function(callback) {
     this.on(SELECTED_EVENT, callback);
   },
 
   addUpdateListener: function(callback) {
     this.on(UPDATE_EVENT, callback);
+  },
+
+  removeUpdateListener: function(callback) {
+    this.removeListener(UPDATE_EVENT, callback);
   },
 
   dispatcherIndex: AppDispatcher.register(function(payload) {

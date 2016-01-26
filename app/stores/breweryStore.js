@@ -38,18 +38,27 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
     this.on(CHANGE_EVENT, callback);
   },
 
+  removeChangeListener: function(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  },
+
   addSelectedBreweryListener: function(callback) {
     this.on(UPDATE_DETAIL_EVENT, callback);
+  },
+
+  removeSelectedBreweryListener: function(callback) {
+    this.removeListener(UPDATE_DETAIL_EVENT, callback);
   },
 
   addDetailChangeListener: function(callback) {
     this.on(UPDATE_INFO_EVENT, callback);
   },
+
+  removeDetailChangeListener: function(callback) {
+    this.remove(UPDATE_INFO_EVENT, callback);
+  },
   //remove event listener?
 
-  removeChangeListener: function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  },
 
   dispatcherIndex: AppDispatcher.register(function(payload) {
     switch(payload.actionType) {

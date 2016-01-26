@@ -19,10 +19,22 @@ app.use('/api/breweries', breweryRouter);
 app.use('/api/beers', beerRouter);
 
 app.use('/client', express.static(__dirname + '/dist/client'));
-app.use('/vendor', express.static(__dirname + '/dist/vendor'));
-app.use('/styles', express.static(__dirname + '/dist/styles'));
 
 app.get('/', function(req, res) {
+  res.render('index');
+});
+// app.get('/about', function(req, res) {
+//   res.render('index');
+// });
+app.get(/about/, function(req, res) {
+  res.render('index');
+});
+
+app.get(/search/, function(req, res) {
+  res.render('index');
+});
+
+app.get(/plan/, function(req, res) {
   res.render('index');
 });
 

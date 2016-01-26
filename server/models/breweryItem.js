@@ -11,6 +11,6 @@ var BreweryItemSchema = {
   website: String
 };
 
-var BreweryItem = mongoose.model('BreweryItem', BreweryItemSchema, 'BreweryItems');
+var BreweryItem = mongoose.model('BreweryItem', BreweryItemSchema, 'breweryItems');
 
 module.exports = BreweryItem;
