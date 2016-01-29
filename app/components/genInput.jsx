@@ -1,9 +1,8 @@
 import React from 'react';
 
 class GenInput extends React.Component {
-  constructor(props) {
-    super(props);
-    let name = props.name;
+  constructor() {
+    super();
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       text: ""
@@ -24,7 +23,6 @@ class GenInput extends React.Component {
   }
 
   handleChange(event) {
-    // this.props.listenToTyping();
     this.setState({ text : event.target.value });
   }
 

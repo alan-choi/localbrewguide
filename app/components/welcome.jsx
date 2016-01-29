@@ -24,7 +24,7 @@ class Welcome extends React.Component {
           </section>
           </Link>
           <section className='city pending north-bay'>
-            <p>{"North Bay\nCOMING\nSOON"}</p>
+            <p>{ "North Bay\nCOMING\nSOON" }</p>
           </section>
           <section className='city pending east-bay'>
             <p>{"East Bay\nCOMING\nSOON"}</p>

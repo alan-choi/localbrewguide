@@ -5,25 +5,23 @@ import BeerStore from './../stores/beerStore';
 import BeerBarChart from './beerBarChart';
 
 class BreweryDetail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.abvSum = 0;
-    this.ibuSum = 0;
-    this.totalBeers = 0;
-    this.changeSelectedBeer = this.changeSelectedBeer.bind(this);
+  constructor() {
+    super();
     this.state = { selectedBeer: {} };
+
+    this.changeSelectedBeer = this.changeSelectedBeer.bind(this);
   }
 
   componentDidMount() {
     BeerStore.addSelectedBeerListener(this.changeSelectedBeer);
   }
 
-  componentWillReceiveProps(newProps) {
-    console.log('detailed brewery props');
+  componentWillUnmount() {
+    BeerStore.removeSelectedBreweryListener(this.changeSelectedBeer);
   }
 
   changeSelectedBeer() {
-    let beer = BeerStore.getSelectedBeer();
+    var beer = BeerStore.getSelectedBeer();
     this.setState({ selectedBeer: beer });
   }
 
@@ -33,36 +31,37 @@ class BreweryDetail extends React.Component {
     //     editMode={ this.props.editMode }
     //     beer={ this.state.selectedBeer }
     //     brewery={ this.props.brewery } />);
-    //     { beerForm }
+    // { beerForm }
+    var brewery = this.props.brewery;
     var beers = [];
     for (var beer in this.props.beers) {
       beers.push(
         <Beer
           key={ this.props.beers[beer]._id }
           beer={ this.props.beers[beer] }
-          brewery={ this.props.brewery } />
+          brewery={ brewery } />
       );
     }
     return(
       <div className="brewery-detail">
-        <h1 className="brewery-name">{ this.props.brewery.name }</h1>
-        <div className="brewery-neighborhood">{ this.props.brewery.neighborhood }</div>
-        <div className="brewery-website"><a href={'http://'+this.props.brewery.website} target="_blank" >website</a></div>
+        <h1 className="brewery-name">{ brewery.name }</h1>
+        <div className="brewery-neighborhood">{ brewery.neighborhood }</div>
+        <div className="brewery-website"><a href={'http://'+brewery.website} target="_blank" >website</a></div>
         <div className="stats">
           <div className="major-stat">
-            { this.props.brewery.brewDetails.stats.abv }
+            { brewery.brewDetails.stats.abv }
             <p>ABV</p>
           </div>
           <div className="major-stat">
-            { this.props.brewery.brewDetails.stats.ibu }
+            { brewery.brewDetails.stats.ibu }
             <p>IBU</p>
           </div>
           <div className="major-stat">
-            { this.props.brewery.beers.length }
+            { brewery.beers.length }
             <p>Total Beers</p>
           </div>
         </div>
-        <BeerBarChart brewery={this.props.brewery} />
+        <BeerBarChart brewery={brewery} />
         <section>
           <div className="list">
             <h2>Beer List</h2>

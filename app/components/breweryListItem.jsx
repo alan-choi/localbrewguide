@@ -3,8 +3,8 @@ import ApiActions from './../actions/apiActions';
 import ApiUtil from './../utils/apiUtil';
 
 class breweryListItem extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -14,14 +14,16 @@ class breweryListItem extends React.Component {
       this.props.fillBreweryForm(this.props.brewery);
     } else {
       ApiActions.changeSelectedBrewery(this.props.brewery._id);
-      ApiUtil.getBeers({id: this.props.brewery._id});
+      ApiActions.updateBeersInStore(this.props.brewery.beers);
+      // ApiUtil.getBeers({id: this.props.brewery._id});
     }
   }
 
   render() {
-    let brewDetails = this.props.brewery.brewDetails;
-    let redText = (this.props.brewery.neighborhood === 'Private' ? 'private' : '');
-    let highlight = (this.props.selected ? "highlight": "");
+    var brewDetails = this.props.brewery.brewDetails;
+    var redText = (this.props.brewery.neighborhood === 'Private' ? 'private' : '');
+    var highlight = (this.props.selected ? "highlight": "");
+
     return (
         <ul className={'item ' + highlight } onClick={this.handleClick}>
           <li>{ this.props.brewery.name }</li>

@@ -18,6 +18,7 @@ class Search extends React.Component {
       breweries: {},
       selectedBrewery: {},
       editMode: false };
+
     this.onInitialLoad = this.onInitialLoad.bind(this);
     this.updateSelectedBrewery = this.updateSelectedBrewery.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
@@ -75,7 +76,6 @@ class Search extends React.Component {
   }
 
   render() {
-    console.log(this.props.params);
     var selectedBrew = this.state.selectedBrewery;
     var selected = (Object.keys(selectedBrew).length === 0 ? { _id: ""} : selectedBrew);
     var breweryDetail = (Object.keys(selectedBrew).length === 0 ? <div></div> :
@@ -87,7 +87,7 @@ class Search extends React.Component {
 
     // var editText = (this.state.editMode ? "close" : "edit mode");
     // <button onClick={ this.toggleEditMode }>{ editText }</button>
-
+    //
     // var breweryForm = (<BreweryForm
     //     editMode={ this.state.editMode }
     //     brewery={ this.state.selectedBrewery }/>);

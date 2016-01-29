@@ -19,6 +19,7 @@ class PieChartLegend extends React.Component {
         <p>{item.label}</p>
       </li>);
     });
+    
     return (
       <ul className='legend'>
         { legendItems }

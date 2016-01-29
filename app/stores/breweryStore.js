@@ -10,11 +10,11 @@ var _selectedBrewery = {};
 
 var BreweryStore = assign({}, EventEmitter.prototype, {
   getBreweries: function() {
-    return _breweries;
+    return assign({}, _breweries);
   },
 
   getSelectedBrewery: function() {
-    return _selectedBrewery;
+    return assign({}, _selectedBrewery);
   },
 
   addBreweries: function(newData) {
@@ -57,8 +57,6 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
   removeDetailChangeListener: function(callback) {
     this.remove(UPDATE_INFO_EVENT, callback);
   },
-  //remove event listener?
-
 
   dispatcherIndex: AppDispatcher.register(function(payload) {
     switch(payload.actionType) {
@@ -67,9 +65,7 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
         BreweryStore.emit(CHANGE_EVENT);
         break;
       case BreweryConstants.ADD_BREWERY:
-        // console.log('adding brewery');
         BreweryStore.addBreweries([payload.brewery]);
-        // BreweryStore.updateBrewery(payload.brewery);
         BreweryStore.emit(CHANGE_EVENT);
         break;
       case BreweryConstants.UPDATE_SELECTED_BREWERY:
@@ -77,7 +73,6 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
         BreweryStore.emit(UPDATE_DETAIL_EVENT);
         break;
       case BreweryConstants.UPDATE_BREWERY:
-        // console.log('updating brewery in store');
         BreweryStore.updateBrewery(payload.brewery);
         BreweryStore.emit(CHANGE_EVENT);
         BreweryStore.emit(UPDATE_DETAIL_EVENT);

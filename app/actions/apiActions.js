@@ -51,7 +51,7 @@ var ApiActions = assign({}, Dispatcher.prototype, {
     console.log('adding new brewery');
     let payload = {
       actionType: BreweryConstants.ADD_BREWERY,
-      brewery: data
+      brewery: [data]
     };
     Dispatcher.dispatch(payload);
   },

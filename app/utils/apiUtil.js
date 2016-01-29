@@ -40,7 +40,6 @@ var ApiUtil = {
       dataType: 'json',
       data: data,
       success: function(data) {
-        // console.log('updated!');
         ApiActions.updateBrewery(data);
       },
       error: function(error) {
@@ -56,6 +55,7 @@ var ApiUtil = {
       data: id,
       dataType: 'json',
       success: function(data) {
+        // ApiUtil.getBreweries();
         ApiActions.updateBeersInStore(data);
       },
       error: function(error) {

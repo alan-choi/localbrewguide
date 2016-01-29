@@ -5,9 +5,10 @@ import GenInput from './genInput';
 class genForm extends React.Component {
   constructor() {
     super();
-    this.listenToTyping = this.listenToTyping.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = { submitted: false, editMode: false };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetSubmit = this.resetSubmit.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -16,11 +17,14 @@ class genForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let length = event.target.children.length;
-    let formData = Array.prototype.slice.call(event.target.children);
-    let item = {};
-    formData.splice(0, length - 1).forEach((input) =>
-      { item[input.name] = input.value; });
+    var length = event.target.children.length;
+    var formData = Array.prototype.slice.call(event.target.children);
+    var item = {};
+
+    formData.splice(0, length - 1).forEach((input) => {
+      item[input.name] = input.value;
+    });
+
     if(this.props.editMode) {
       item._id = this.props.beer._id;
       ApiUtil.patchBeer(item);
@@ -29,25 +33,23 @@ class genForm extends React.Component {
       console.log('adding this beer to the database');
       ApiUtil.postBeer(item);
     }
+
     this.setState({ submitted: true });
-    this.setState({ submitted: false });
+    setTimeout(this.resetSubmit, 0);
   }
 
-  listenToTyping() {
-    if (this.state.submitted) {
-      this.setState({ submitted: false });
-    }
+  resetSubmit() {
+    this.setState({ submitted: false });
   }
 
   render() {
     var buttonText = ( this.props.editMode ? "update" : "add" );
-    let allInputs = this.props.fieldNames.map((fieldName, idx) => {
+    var allInputs = this.props.fieldNames.map((fieldName, idx) => {
       return (
         <GenInput
           key={ fieldName + idx }
           beer={ this.props.beer }
           brewery={ this.props.brewery }
-          listenToTyping={ this.listenToTyping }
           submitted={ this.state.submitted }
           editMode={ this.state.editMode }
           name={ fieldName } />);

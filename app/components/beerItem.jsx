@@ -2,13 +2,14 @@ import React from 'react';
 import ApiActions from './../actions/apiActions';
 
 class Beer extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.handleClick = this.handleClick.bind(this);
   }
+  
   handleClick(event) {
     event.preventDefault();
-    // ApiActions.changeSelectedBeer(this.props.beer);
+    ApiActions.changeSelectedBeer(this.props.beer);
   }
 
   render() {

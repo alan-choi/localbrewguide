@@ -11,11 +11,11 @@ var _selectedBeer = {};
 
 var BeerStore = assign({}, EventEmitter.prototype, {
   getBeers: function() {
-    return _beers;
+    return assign({}, _beers);
   },
 
   getSelectedBeer: function() {
-    return _selectedBeer;
+    return assign({}, _selectedBeer);
   },
 
   updateBeerList: function(newData) {
@@ -72,8 +72,6 @@ var BeerStore = assign({}, EventEmitter.prototype, {
         BeerStore.emit(SELECTED_EVENT);
       break;
     }
-
-    return true;
   })
 
 });

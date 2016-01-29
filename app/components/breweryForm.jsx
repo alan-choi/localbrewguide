@@ -5,11 +5,12 @@ import GenInput from './genInput';
 class BreweryForm extends React.Component {
   constructor() {
     super();
-    this.listenToTyping = this.listenToTyping.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.fieldNames =
       ['name', 'street', 'city', 'state', 'zip', 'neighborhood','website'];
     this.state = { submitted: false, editMode: false };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetSubmit = this.resetSubmit.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -18,34 +19,35 @@ class BreweryForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let length = event.target.children.length;
-    let formData = Array.prototype.slice.call(event.target.children);
-    let brewery = {};
+    var length = event.target.children.length;
+    var formData = Array.prototype.slice.call(event.target.children);
+    var brewery = {};
+
     formData.splice(0, length - 1).forEach((input) =>
       { brewery[input.name] = input.value; });
+
     if(this.props.editMode) {
       brewery._id = this.props.brewery._id;
-      ApiUtil.patchBrewery(brewery);
+      // ApiUtil.patchBrewery(brewery);
     } else {
-      ApiUtil.postBrewery(brewery);
+      // ApiUtil.postBrewery(brewery);
     }
+    
     this.setState({ submitted: true });
+    setTimeout(this.resetSubmit, 0);
   }
 
-  listenToTyping() {
-    if (this.state.submitted) {
-      this.setState({ submitted: false });
-    }
+  resetSubmit() {
+    this.setState({ submitted: false });
   }
 
   render() {
-    let allInputs = this.fieldNames.map((fieldName, idx) => {
+    var allInputs = this.fieldNames.map((fieldName, idx) => {
       return (
         <GenInput
           key={ fieldName + idx }
           beer ={'empty beer'}
           brewery={ this.props.brewery }
-          listenToTyping={ this.listenToTyping }
           submitted={ this.state.submitted }
           editMode={ this.state.editMode }
           name={ fieldName } />);

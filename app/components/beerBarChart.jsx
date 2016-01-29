@@ -5,12 +5,12 @@ import {Bar as BarChart} from 'react-chartjs';
 import {Pie as PieChart} from 'react-chartjs';
 
 class BeerBarChart extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   }
 
   findBeerColor(beerType) {
-    let beerString = beerType.toUpperCase().replace(/\s/, "_");
+    var beerString = beerType.toUpperCase().replace(/\s/, "_");
     if (typeof ChartColors[beerString] === 'undefined') {
       return ChartColors.SPECIAL;
     }
@@ -19,18 +19,7 @@ class BeerBarChart extends React.Component {
 
   render(){
     var beerSummary = this.props.brewery.brewDetails.summary;
-    var beerTypes = Object.keys(beerSummary);
-    var beerTotals = [];
     var pieData = [];
-
-    for (var key in beerSummary) {
-      beerTotals.push(beerSummary[key]);
-      pieData.push({
-        value: beerSummary[key],
-        label: key,
-        color: this.findBeerColor(key)
-      });
-    }
     var chartOptions = {
     segmentShowStroke : true,
     segmentStrokeColor : "white",
@@ -41,6 +30,13 @@ class BeerBarChart extends React.Component {
     animateRotate : true,
     };
 
+    for (let beerType in beerSummary) {
+      pieData.push({
+        value: beerSummary[beerType],
+        label: beerType,
+        color: this.findBeerColor(beerType)
+      });
+    }
     return (
       <div className='pie-chart'>
         <h2>Beer Breakdown</h2>
