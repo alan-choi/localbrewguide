@@ -10,6 +10,8 @@ import ApiUtil from './../utils/apiUtil';
 import {Link} from 'react-router';
 import About from './about';
 
+// const Fun = (props) => <p> hello from a stateless functional component {props.stuff}</p>;
+
 class Search extends React.Component {
   constructor() {
     super();
@@ -19,7 +21,7 @@ class Search extends React.Component {
       selectedBrewery: {},
       editMode: false };
 
-    this.onInitialLoad = this.onInitialLoad.bind(this);
+    this.fetchBreweries = this.fetchBreweries.bind(this);
     this.updateSelectedBrewery = this.updateSelectedBrewery.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.getBeersFromStore = this.getBeersFromStore.bind(this);
@@ -30,42 +32,37 @@ class Search extends React.Component {
     ApiUtil.getBreweries();
     BeerStore.addChangeListener(this.getBeersFromStore);
     BeerStore.addUpdateListener(this.updateBeerList);
-    BreweryStore.addChangeListener(this.onInitialLoad);
+    BreweryStore.addChangeListener(this.fetchBreweries);
     BreweryStore.addSelectedBreweryListener(this.updateSelectedBrewery);
   }
 
   componentWillUnmount() {
     BeerStore.removeChangeListener(this.getBeersFromStore);
     BeerStore.removeUpdateListener(this.updateBeerList);
-    BreweryStore.removeChangeListener(this.onInitialLoad);
+    BreweryStore.removeChangeListener(this.fetchBreweries);
     BreweryStore.removeSelectedBreweryListener(this.updateSelectedBrewery);
   }
 
   updateSelectedBrewery(selection) {
-    console.log('updating selected brewery');
     var brewery = BreweryStore.getSelectedBrewery();
     this.setState({ selectedBrewery: selection || brewery });
   }
 
   updateDetailInfo() {
-    console.log('updating brewery info');
     this.setState({ selectedBrewery: Brewery.getSelectedBrewery() });
   }
 
-  onInitialLoad() {
-    console.log('getting breweries from store');
+  fetchBreweries() {
     var breweries = BreweryStore.getBreweries();
     this.setState({ breweries: breweries });
   }
 
   getBeersFromStore() {
-    console.log('getting beers from store!');
     var beers = BeerStore.getBeers();
     this.setState({ beers: beers });
   }
 
   updateBeerList() {
-    console.log('updating beer list');
     var beers = BeerStore.getBeers();
     this.setState({ beers: beers });
   }

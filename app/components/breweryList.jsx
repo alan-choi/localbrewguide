@@ -53,7 +53,6 @@ class BreweryList extends React.Component {
 
   render() {
     var breweries = this.state.breweries;
-
     return (
       <div className="list">
         <div className="list-head">

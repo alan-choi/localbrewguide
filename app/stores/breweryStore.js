@@ -10,11 +10,11 @@ var _selectedBrewery = {};
 
 var BreweryStore = assign({}, EventEmitter.prototype, {
   getBreweries: function() {
-    return assign({}, _breweries);
+    return _breweries;
   },
 
   getSelectedBrewery: function() {
-    return assign({}, _selectedBrewery);
+    return _selectedBrewery;
   },
 
   addBreweries: function(newData) {
@@ -60,7 +60,7 @@ var BreweryStore = assign({}, EventEmitter.prototype, {
 
   dispatcherIndex: AppDispatcher.register(function(payload) {
     switch(payload.actionType) {
-      case BreweryConstants.INITIAL_LOAD:
+      case BreweryConstants.RECEIVED_BREWERIES:
         BreweryStore.addBreweries(payload.data);
         BreweryStore.emit(CHANGE_EVENT);
         break;

@@ -4,7 +4,7 @@ import PieChartLegend from './PieChartLegend';
 import {Bar as BarChart} from 'react-chartjs';
 import {Pie as PieChart} from 'react-chartjs';
 
-class BeerBarChart extends React.Component {
+class beerPieChart extends React.Component {
   constructor() {
     super();
   }
@@ -51,4 +51,4 @@ class BeerBarChart extends React.Component {
   }
 }
 
-export default BeerBarChart;
+export default beerPieChart;

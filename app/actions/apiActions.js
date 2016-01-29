@@ -5,9 +5,8 @@ var assign = require('object-assign');
 
 var ApiActions = assign({}, Dispatcher.prototype, {
   getBreweries: function(data) {
-    console.log('loading initial data');
     let payload = {
-      actionType: BreweryConstants.INITIAL_LOAD,
+      actionType: BreweryConstants.RECEIVED_BREWERIES,
       data: data
     };
 

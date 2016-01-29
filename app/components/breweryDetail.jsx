@@ -2,7 +2,7 @@ import React from 'react';
 import GenForm from './genForm';
 import Beer from './beerItem';
 import BeerStore from './../stores/beerStore';
-import BeerBarChart from './beerBarChart';
+import beerPieChart from './beerPieChart';
 
 class BreweryDetail extends React.Component {
   constructor() {
@@ -61,7 +61,7 @@ class BreweryDetail extends React.Component {
             <p>Total Beers</p>
           </div>
         </div>
-        <BeerBarChart brewery={brewery} />
+        <beerPieChart brewery={brewery} />
         <section>
           <div className="list">
             <h2>Beer List</h2>
